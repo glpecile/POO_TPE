@@ -9,7 +9,7 @@ public class MovablePoint extends Point implements Movable {
     }
 
     @Override
-    public void move(int moveInX, int moveInY) {
+    public void move(double moveInX, double moveInY) {
         x += moveInX;
         y += moveInY;
     }

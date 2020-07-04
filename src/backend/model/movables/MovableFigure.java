@@ -8,7 +8,7 @@ public interface MovableFigure extends Movable{
     List<MovablePoint> getPoints();
 
     @Override
-    default void move(int moveInX, int moveInY){
+    default void move(double moveInX, double moveInY){
         for (MovablePoint p : getPoints()) {
             p.move(moveInX, moveInY);
         }

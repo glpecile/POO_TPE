@@ -9,9 +9,9 @@ public class Circle extends Ellipse {
         this.radius = radius;
     }
 
-    public Circle(Point centerPoint, Point endPoint) {
-        this(centerPoint,centerPoint.distanceTo(endPoint));
-    }
+//    public Circle(Point centerPoint, Point endPoint) {
+//        this(centerPoint,centerPoint.distanceTo(endPoint));
+//    }
 
     @Override
     public String toString() {

@@ -1,6 +1,6 @@
 package backend.model.movables;
 
-import backend.model.basic.Rectangle;
+import backend.model.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;

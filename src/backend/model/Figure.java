@@ -1,4 +1,4 @@
-package backend.model.basic;
+package backend.model;
 
 public abstract class Figure {
     //Funcion que determina si un punto pertence a una figura

@@ -1,6 +1,7 @@
 package backend.model.movables;
 
-import backend.model.basic.Point;
+import backend.model.Movable;
+import backend.model.Point;
 
 public class MovablePoint extends Point implements Movable {
 

@@ -1,9 +1,9 @@
 package frontend;
 
 import backend.CanvasState;
-import backend.model.basic.Circle;
-import backend.model.basic.Point;
-import backend.model.basic.Rectangle;
+import backend.model.Circle;
+import backend.model.Point;
+import backend.model.Rectangle;
 import backend.model.movables.MovableCircle;
 import backend.model.movables.MovableFigure;
 import backend.model.movables.MovablePoint;

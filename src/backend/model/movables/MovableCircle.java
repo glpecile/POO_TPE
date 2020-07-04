@@ -1,7 +1,6 @@
 package backend.model.movables;
 
-import backend.model.basic.Circle;
-import backend.model.basic.Point;
+import backend.model.Circle;
 
 import java.util.ArrayList;
 import java.util.List;

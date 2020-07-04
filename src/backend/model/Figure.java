@@ -16,7 +16,9 @@ public abstract class Figure implements Movable {
     public void move(double moveInX, double moveInY){
         getPoints().forEach(p->p.move(moveInX,moveInY));
     }
-    protected boolean validate(Point startPoint, Point endPoint){
+
+    @Deprecated
+    protected boolean validate(Point startPoint, Point endPoint) {
         if(startPoint == null || endPoint == null){
             return false;
         }

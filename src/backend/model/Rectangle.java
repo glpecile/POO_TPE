@@ -8,7 +8,10 @@ public class Rectangle extends Figure {
     private final Point topLeft, bottomRight;
 
     public Rectangle(Point topLeft, Point bottomRight) {
-        if(!validate(topLeft,bottomRight)){
+        if(topLeft == null || bottomRight == null) {
+            throw new NullPointerException();
+        }
+        if(bottomRight.getX() < topLeft.getX() || topLeft.getY() < bottomRight.getY()) {
             throw new IllegalArgumentException();
         }
         this.topLeft = topLeft;

@@ -9,6 +9,7 @@ import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
@@ -59,7 +60,9 @@ public class PaintPane extends BorderPane {
 		buttonsBox.setStyle("-fx-background-color: #999999");
 		buttonsBox.setPrefWidth(100);
 		gc.setLineWidth(1);
+
 		canvas.setOnMousePressed(event -> startPoint = new Point(event.getX(), event.getY()));
+
 		canvas.setOnMouseReleased(event -> {
 			Point endPoint = new Point(event.getX(), event.getY());
 			Figure newFigure = null;//FigureButtons.figure()
@@ -68,16 +71,16 @@ public class PaintPane extends BorderPane {
 					newFigure = new Rectangle(startPoint, endPoint);
 				}
 				else if(circleButton.isSelected()) {
-					newFigure = new Circle(startPoint, endPoint);
+					newFigure = new Circle(startPoint, startPoint.distanceTo(endPoint));
 				}
 			}catch (Exception e){
-				System.out.println(e.getClass());
+				System.out.println(e.getMessage());
 			}
-
 			canvasState.addFigure(newFigure);
-			startPoint = null;
+			//startPoint = null;
 			redrawCanvas();
 		});
+
 		canvas.setOnMouseMoved(event -> {
 			Point eventPoint = new Point(event.getX(), event.getY());
 			boolean found = false;
@@ -116,6 +119,7 @@ public class PaintPane extends BorderPane {
 				redrawCanvas();
 			}
 		});
+
 		canvas.setOnMouseDragged(event -> {
 			if(selectionButton.isSelected()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
@@ -125,6 +129,7 @@ public class PaintPane extends BorderPane {
 				redrawCanvas();
 			}
 		});
+
 		setLeft(buttonsBox);
 		setRight(canvas);
 	}

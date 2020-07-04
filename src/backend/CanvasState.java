@@ -10,7 +10,9 @@ public class CanvasState {
     private final List<Figure> list = new ArrayList<>();
 
     public void addFigure(Figure figure) {
-        list.add(figure);
+        if(figure != null) {
+            list.add(figure);
+        }
     }
 
     public Iterable<Figure> figures() {

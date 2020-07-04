@@ -19,4 +19,9 @@ public class Circle extends Ellipse {
         return radius;
     }
 
+    @Override
+    public boolean contains(Point p) {
+        return Math.sqrt(Math.pow(getCenterPoint().getX() - p.getX(), 2) +
+                Math.pow(getCenterPoint().getY() - p.getY(), 2)) < getRadius();
+    }
 }

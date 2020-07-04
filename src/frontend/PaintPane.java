@@ -65,7 +65,7 @@ public class PaintPane extends BorderPane {
 
 		canvas.setOnMouseReleased(event -> {
 			Point endPoint = new Point(event.getX(), event.getY());
-			Figure newFigure = null;//FigureButtons.figure()
+			Figure newFigure = null;
 			try {
 				if(rectangleButton.isSelected()) {
 					newFigure = new Rectangle(startPoint, endPoint);
@@ -73,11 +73,11 @@ public class PaintPane extends BorderPane {
 				else if(circleButton.isSelected()) {
 					newFigure = new Circle(startPoint, startPoint.distanceTo(endPoint));
 				}
-			}catch (Exception e){
-				System.out.println(e.getMessage());
+			}catch (Exception e){ //DEFINIR QUE HACER CUANDO TIRE EXCEPCION
+				System.out.println(e.getClass());
 			}
 			canvasState.addFigure(newFigure);
-			//startPoint = null;
+			//startPoint = null; //Esto por ahora no sabemos para que sirve
 			redrawCanvas();
 		});
 

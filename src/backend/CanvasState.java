@@ -1,5 +1,6 @@
 package backend;
 
+import backend.model.Figure;
 import backend.model.movables.MovableFigure;
 
 import java.util.ArrayList;
@@ -7,15 +8,15 @@ import java.util.List;
 
 public class CanvasState {
 
-    private final List<MovableFigure> list = new ArrayList<>();
+    private final List<Figure> list = new ArrayList<>();
 
-    public void addFigure(MovableFigure figure) {
+    public void addFigure(Figure figure) {
         if(figure != null) {
             list.add(figure);
         }
     }
 
-    public Iterable<MovableFigure> figures() {
+    public Iterable<Figure> figures() {
         return new ArrayList<>(list);
     }
 

@@ -2,12 +2,9 @@ package frontend;
 
 import backend.CanvasState;
 import backend.model.Circle;
+import backend.model.Figure;
 import backend.model.Point;
 import backend.model.Rectangle;
-import backend.model.movables.MovableCircle;
-import backend.model.movables.MovableFigure;
-import backend.model.movables.MovablePoint;
-import backend.model.movables.MovableRectangle;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -35,10 +32,10 @@ public class PaintPane extends BorderPane {
 	ToggleButton circleButton = new ToggleButton("Círculo");
 
 	// Dibujar una figura
-	MovablePoint startPoint;
+	Point startPoint;
 
 	// Seleccionar una figura
-	MovableFigure selectedFigure;
+	Figure selectedFigure;
 
 	// StatusBar
 	StatusPane statusPane;
@@ -59,22 +56,22 @@ public class PaintPane extends BorderPane {
 		buttonsBox.setStyle("-fx-background-color: #999999");
 		buttonsBox.setPrefWidth(100);
 		gc.setLineWidth(1);
-		canvas.setOnMousePressed(event -> startPoint = new MovablePoint(event.getX(), event.getY()));
+		canvas.setOnMousePressed(event -> startPoint = new Point(event.getX(), event.getY()));
 		canvas.setOnMouseReleased(event -> {
-			MovablePoint endPoint = new MovablePoint(event.getX(), event.getY());
+			Point endPoint = new Point(event.getX(), event.getY());
 			if(startPoint == null) {
 				return;
 			}
 			if(endPoint.getX() < startPoint.getX() || endPoint.getY() < startPoint.getY()) {
 				return;
 			}
-			MovableFigure newFigure = null;
+			Figure newFigure = null;
 			if(rectangleButton.isSelected()) {
-				newFigure = new MovableRectangle(startPoint, endPoint);
+				newFigure = new Rectangle(startPoint, endPoint);
 			}
 			else if(circleButton.isSelected()) {
 				double circleRadius = Math.abs(endPoint.getX() - startPoint.getX());
-				newFigure = new MovableCircle(startPoint, circleRadius);
+				newFigure = new Circle(startPoint, circleRadius);
 			}
 			canvasState.addFigure(newFigure);
 			startPoint = null;
@@ -84,7 +81,7 @@ public class PaintPane extends BorderPane {
 			Point eventPoint = new Point(event.getX(), event.getY());
 			boolean found = false;
 			StringBuilder label = new StringBuilder();
-			for(MovableFigure figure : canvasState.figures()) {
+			for(Figure figure : canvasState.figures()) {
 				if(figureBelongs(figure, eventPoint)) {
 					found = true;
 					label.append(figure.toString());
@@ -102,7 +99,7 @@ public class PaintPane extends BorderPane {
 				Point eventPoint = new Point(event.getX(), event.getY());
 				boolean found = false;
 				StringBuilder label = new StringBuilder("Se seleccionó: ");
-				for (MovableFigure figure : canvasState.figures()) {
+				for (Figure figure : canvasState.figures()) {
 					if(figureBelongs(figure, eventPoint)) {
 						found = true;
 						selectedFigure = figure;
@@ -133,7 +130,7 @@ public class PaintPane extends BorderPane {
 
 	void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		for(MovableFigure figure : canvasState.figures()) {
+		for(Figure figure : canvasState.figures()) {
 			if(figure == selectedFigure) {
 				gc.setStroke(Color.RED);
 			} else {
@@ -155,7 +152,7 @@ public class PaintPane extends BorderPane {
 		}
 	}
 
-	boolean figureBelongs(MovableFigure figure, Point eventPoint) {
+	boolean figureBelongs(Figure figure, Point eventPoint) {
 		boolean found = false;
 		if(figure instanceof Rectangle) {
 			Rectangle rectangle = (Rectangle) figure;

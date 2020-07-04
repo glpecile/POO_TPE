@@ -10,7 +10,7 @@ public class Circle extends Ellipse {
     }
 
     public Circle(Point centerPoint, Point endPoint) {
-        this(centerPoint,computeRadius(centerPoint,endPoint));
+        this(centerPoint,centerPoint.distanceTo(endPoint));
     }
 
     @Override
@@ -24,13 +24,6 @@ public class Circle extends Ellipse {
 
     @Override
     public boolean contains(Point p) {
-        return Math.sqrt(Math.pow(getCenterPoint().getX() - p.getX(), 2) +
-                Math.pow(getCenterPoint().getY() - p.getY(), 2)) < getRadius();
-    }
-    public static double computeRadius(Point centerPoint, Point endPoint){
-        if(centerPoint == null || endPoint ==null){
-            return 0;
-        }
-        return centerPoint.distanceTo(endPoint);
+        return centerPoint.distanceTo(p) < getRadius();
     }
 }

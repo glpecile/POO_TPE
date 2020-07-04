@@ -1,5 +1,8 @@
 package backend.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Rectangle extends Figure {
 
     private final Point topLeft, bottomRight;
@@ -26,6 +29,14 @@ public class Rectangle extends Figure {
     @Override
     public String toString() {
         return String.format("Rectángulo [ %s , %s ]", topLeft, bottomRight);
+    }
+
+    @Override
+    public List<Point> getPoints() {
+        List<Point> movablePoints = new ArrayList<>();
+        movablePoints.add(getBottomRight());
+        movablePoints.add(getTopLeft());
+        return movablePoints;
     }
 
 }

@@ -1,5 +1,9 @@
 package backend.model;
 
+import backend.model.movables.MovablePoint;
+
+import java.util.List;
+
 public class Circle extends Ellipse {
 
 //    protected final Point centerPoint;

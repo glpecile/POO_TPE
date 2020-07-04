@@ -1,5 +1,10 @@
 package backend.model;
 
+import backend.model.movables.MovablePoint;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ellipse extends Figure {
 
     protected final Point centerPoint;
@@ -33,4 +38,12 @@ public class Ellipse extends Figure {
     public String toString() {
         return String.format("Elipse [Centro: %s, Eje mayor: %.2f, Eje menor: %.2f]", centerPoint, mayorAxis, minorAxis);
     }
+
+    @Override
+    public List<Point> getPoints() {
+        List<Point> movablePoints = new ArrayList<>();
+        movablePoints.add(getCenterPoint());
+        return movablePoints;
+    }
+
 }

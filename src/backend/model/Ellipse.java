@@ -10,6 +10,9 @@ public class Ellipse extends Figure {
     protected final double minorAxis;
 
     public Ellipse(Point centerPoint, double mayorAxis, double minorAxis) {
+        if(centerPoint==null || mayorAxis==0 || minorAxis==0){
+            throw new IllegalArgumentException();
+        }
         this.centerPoint = centerPoint;
         this.mayorAxis = mayorAxis;
         this.minorAxis = minorAxis;

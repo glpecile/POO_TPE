@@ -8,6 +8,9 @@ public class Rectangle extends Figure {
     private final Point topLeft, bottomRight;
 
     public Rectangle(Point topLeft, Point bottomRight) {
+        if(!validate(topLeft,bottomRight)){
+            throw new IllegalArgumentException();
+        }
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
     }

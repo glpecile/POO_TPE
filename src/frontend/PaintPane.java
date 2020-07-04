@@ -10,11 +10,15 @@ import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class PaintPane extends BorderPane {
 
@@ -29,11 +33,11 @@ public class PaintPane extends BorderPane {
 
 	// Botones Barra Izquierda
 	ToggleButton selectionButton = new ToggleButton("Seleccionar");
-	ToggleButton rectangleButton = new ToggleButton("Rectángulo");
-	ToggleButton circleButton = new ToggleButton("Círculo");
-	ToggleButton squareButton = new ToggleButton("Cuadrado");
-	ToggleButton ellipseButton = new ToggleButton("Elipse");
-	ToggleButton lineButton = new ToggleButton("Línea");
+	ToggleButton rectangleButton = FigureButtons.RECTANGLE.getButton();
+	ToggleButton circleButton = FigureButtons.CIRCLE.getButton();
+	ToggleButton squareButton = FigureButtons.SQUARE.getButton();
+	ToggleButton ellipseButton = FigureButtons.ELLIPSE.getButton();
+	//ToggleButton lineButton = FigureButtons.LINE.getButton();
 
 	// Dibujar una figura
 	Point startPoint;
@@ -47,7 +51,7 @@ public class PaintPane extends BorderPane {
 	public PaintPane(CanvasState canvasState, StatusPane statusPane) {
 		this.canvasState = canvasState;
 		this.statusPane = statusPane;
-		ToggleButton[] toolsArr = {selectionButton, rectangleButton, circleButton, squareButton, ellipseButton, lineButton};
+		ToggleButton[] toolsArr = { selectionButton, rectangleButton, circleButton, ellipseButton, squareButton};
 		ToggleGroup tools = new ToggleGroup();
 		for (ToggleButton tool : toolsArr) {
 			tool.setMinWidth(90);
@@ -56,6 +60,7 @@ public class PaintPane extends BorderPane {
 		}
 		VBox buttonsBox = new VBox(10);
 		buttonsBox.getChildren().addAll(toolsArr);
+		//buttonsBox.getChildren().addAll(Arrays.stream(FigureButtons.values()).map(FigureButtons::getButton).collect(Collectors.toList()));
 		buttonsBox.setPadding(new Insets(5));
 		buttonsBox.setStyle("-fx-background-color: #999999");
 		buttonsBox.setPrefWidth(100);
@@ -65,19 +70,12 @@ public class PaintPane extends BorderPane {
 
 		canvas.setOnMouseReleased(event -> {
 			Point endPoint = new Point(event.getX(), event.getY());
-			Figure newFigure = null;
 			try {
-				if(rectangleButton.isSelected()) {
-					newFigure = new Rectangle(startPoint, endPoint);
-				}
-				else if(circleButton.isSelected()) {
-					newFigure = new Circle(startPoint, startPoint.distanceTo(endPoint));
-				}
-			}catch (Exception e){ //DEFINIR QUE HACER CUANDO TIRE EXCEPCION
+				Figure newFigure = FigureButtons.figure(startPoint,endPoint);
+				canvasState.addFigure(newFigure);
+			}catch (Exception e){
 				System.out.println(e.getClass());
 			}
-			canvasState.addFigure(newFigure);
-			//startPoint = null; //Esto por ahora no sabemos para que sirve
 			redrawCanvas();
 		});
 
@@ -123,8 +121,8 @@ public class PaintPane extends BorderPane {
 		canvas.setOnMouseDragged(event -> {
 			if(selectionButton.isSelected()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
-				double diffX = (eventPoint.getX() - startPoint.getX()) / 100;
-				double diffY = (eventPoint.getY() - startPoint.getY()) / 100;
+				double diffX = (eventPoint.getX() - startPoint.getX()) / 20;
+				double diffY = (eventPoint.getY() - startPoint.getY()) / 20;
 				selectedFigure.move(diffX, diffY);
 				redrawCanvas();
 			}

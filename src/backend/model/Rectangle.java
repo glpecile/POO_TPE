@@ -11,7 +11,7 @@ public class Rectangle extends Figure {
         if(topLeft == null || bottomRight == null) {
             throw new NullPointerException();
         }
-        if(bottomRight.getX() < topLeft.getX() || topLeft.getY() < bottomRight.getY()) {
+        if(bottomRight.getX() < topLeft.getX() || bottomRight.getY() < topLeft.getY()) {
             throw new IllegalArgumentException();
         }
         this.topLeft = topLeft;

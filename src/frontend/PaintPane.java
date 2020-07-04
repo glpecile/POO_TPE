@@ -68,8 +68,7 @@ public class PaintPane extends BorderPane {
 					newFigure = new Rectangle(startPoint, endPoint);
 				}
 				else if(circleButton.isSelected()) {
-					double circleRadius = Math.abs(endPoint.getX() - startPoint.getX());
-					newFigure = new Circle(startPoint, circleRadius);
+					newFigure = new Circle(startPoint, endPoint);
 				}
 			}catch (Exception e){
 				e.getMessage();

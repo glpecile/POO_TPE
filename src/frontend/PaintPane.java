@@ -65,8 +65,8 @@ public class PaintPane extends BorderPane {
 			if(startPoint == null) {
 				return;
 			}
-			if (Double.compare(endPoint.getX(),startPoint.getX())>0 && Double.compare(endPoint.getY(),startPoint.getY())>0) {
-//			if(endPoint.getX() < startPoint.getX() || endPoint.getY() < startPoint.getY()) {
+
+			if(endPoint.getX() < startPoint.getX() || endPoint.getY() < startPoint.getY()) {
 				return;
 			}
 			Figure newFigure = null;

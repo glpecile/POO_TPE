@@ -25,6 +25,11 @@ public class Ellipse extends Figure {
     }
 
     @Override
+    public boolean belongs(Point p) {
+        return false;
+    }
+
+    @Override
     public String toString() {
         return String.format("Elipse [Centro: %s, Eje mayor: %.2f, Eje menor: %.2f]", centerPoint, mayorAxis, minorAxis);
     }

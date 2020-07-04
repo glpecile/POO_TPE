@@ -1,7 +1,6 @@
 package backend;
 
 import backend.model.Figure;
-import backend.model.movables.MovableFigure;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,5 @@
 package backend.model;
 
-import backend.model.movables.MovablePoint;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +28,7 @@ public class Ellipse extends Figure {
     }
 
     @Override
-    public boolean belongs(Point p) {
+    public boolean contains(Point p) {
         return false;
     }
 
@@ -40,7 +38,7 @@ public class Ellipse extends Figure {
     }
 
     @Override
-    public List<Point> getPoints() {
+    protected List<Point> getPoints() {
         List<Point> movablePoints = new ArrayList<>();
         movablePoints.add(getCenterPoint());
         return movablePoints;

@@ -21,7 +21,7 @@ public class Rectangle extends Figure {
     }
 
     @Override
-    public boolean belongs(Point p) {
+    public boolean contains(Point p) {
         return p.getX() > getTopLeft().getX() && p.getX() < getBottomRight().getX() &&
                 p.getY() > getTopLeft().getY() && p.getY() < getBottomRight().getY();
     }
@@ -32,7 +32,7 @@ public class Rectangle extends Figure {
     }
 
     @Override
-    public List<Point> getPoints() {
+    protected List<Point> getPoints() {
         List<Point> movablePoints = new ArrayList<>();
         movablePoints.add(getBottomRight());
         movablePoints.add(getTopLeft());

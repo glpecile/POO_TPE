@@ -1,9 +1,5 @@
 package backend.model;
 
-import backend.model.movables.MovablePoint;
-
-import java.util.List;
-
 public class Circle extends Ellipse {
 
 //    protected final Point centerPoint;
@@ -24,7 +20,7 @@ public class Circle extends Ellipse {
     }
 
     @Override
-    public boolean belongs(Point p) {
+    public boolean contains(Point p) {
         return Math.sqrt(Math.pow(getCenterPoint().getX() - p.getX(), 2) +
                 Math.pow(getCenterPoint().getY() - p.getY(), 2)) < getRadius();
     }

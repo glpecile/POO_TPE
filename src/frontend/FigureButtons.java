@@ -45,8 +45,7 @@ public enum FigureButtons {
     }
 
     public static Figure fetchFigure(Point startPoint, Point endPoint){
-        for (FigureButtons b:
-             values()) {
+        for (FigureButtons b : values()) {
             if(b.button.isSelected()){
                 return b.getFigure(startPoint,endPoint);
             }

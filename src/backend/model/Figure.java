@@ -18,13 +18,4 @@ public abstract class Figure implements Movable {
     }
 
 
-
-    @Deprecated
-    protected boolean validate(Point startPoint, Point endPoint) {
-        if(startPoint == null || endPoint == null){
-            return false;
-        }
-        return !(endPoint.getX() < startPoint.getX() || endPoint.getY() < startPoint.getY());
-    }
-
 }

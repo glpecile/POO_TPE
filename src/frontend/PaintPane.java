@@ -5,14 +5,12 @@ import backend.model.Circle;
 import backend.model.Figure;
 import backend.model.Point;
 import backend.model.Rectangle;
+import com.sun.xml.internal.bind.v2.runtime.ClassBeanInfoImpl;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -25,25 +23,33 @@ import java.util.stream.Collectors;
 public class PaintPane extends BorderPane {
 
 	// BackEnd
-	CanvasState canvasState;
+	private CanvasState canvasState;
 
 	// Canvas y relacionados
-	Canvas canvas = new Canvas(800, 600);
-	GraphicsContext gc = canvas.getGraphicsContext2D();
-	Color lineColor = Color.BLACK;
-	Color fillColor = Color.YELLOW;
+	private Canvas canvas = new Canvas(800, 600);
+	private GraphicsContext gc = canvas.getGraphicsContext2D();
+	private Color lineColor = Color.BLACK;
+	private Color fillColor = Color.YELLOW;
 
 	// Botones Barra Izquierda
-	ToggleButton selectionButton = new ToggleButton("Seleccionar");
+	private ToggleButton selectionButton = new ToggleButton("Seleccionar");
+	private ToggleButton deleteButton = new ToggleButton("Borrar");
+	private ToggleButton bringForwardButton = new ToggleButton("Al fondo");
+	private ToggleButton sendBackButton = new ToggleButton("Al frente");
+	private Slider strokeSlider = new Slider(1,50,0);
+	private ColorPicker strokeColorPicker = new ColorPicker();
+	private final Label	strokeText = new Label("Borde");
+	private ColorPicker fillColorPicker = new ColorPicker();
+	private final Label	fillText = new Label("Relleno");
 
 	// Dibujar una figura
-	Point startPoint;
+	private Point startPoint;
 
 	// Seleccionar una figura
-	Figure selectedFigure;
+	private Figure selectedFigure;
 
 	// StatusBar
-	StatusPane statusPane;
+	private StatusPane statusPane;
 
 	public PaintPane(CanvasState canvasState, StatusPane statusPane) {
 		this.canvasState = canvasState;
@@ -52,13 +58,19 @@ public class PaintPane extends BorderPane {
 		ToggleGroup tools = new ToggleGroup();
 		toolsList.add(selectionButton);
 		toolsList.addAll(Arrays.stream(FigureButtons.values()).map(FigureButtons::getButton).collect(Collectors.toList()));
-		for (ToggleButton tool : toolsList) {
-			tool.setMinWidth(90);
-			tool.setToggleGroup(tools);
-			tool.setCursor(Cursor.HAND);
-		}
+		toolsList.add(deleteButton);
+		toolsList.add(bringForwardButton);
+		toolsList.add(sendBackButton);
+		toolsList.forEach(tool -> { tool.setMinWidth(90); tool.setToggleGroup(tools); tool.setCursor(Cursor.HAND); });
 		VBox buttonsBox = new VBox(10);
 		buttonsBox.getChildren().addAll(toolsList);
+		strokeSlider.setShowTickMarks(true);
+		strokeSlider.setShowTickLabels(true);
+		buttonsBox.getChildren().add(strokeText);
+		buttonsBox.getChildren().add(strokeSlider);
+		buttonsBox.getChildren().add(strokeColorPicker);
+		buttonsBox.getChildren().add(fillText);
+		buttonsBox.getChildren().add(fillColorPicker);
 		buttonsBox.setPadding(new Insets(5));
 		buttonsBox.setStyle("-fx-background-color: #999999");
 		buttonsBox.setPrefWidth(100);
@@ -70,7 +82,8 @@ public class PaintPane extends BorderPane {
 			Point endPoint = new Point(event.getX(), event.getY());
 			try {
 				Figure newFigure = FigureButtons.fetchFigure(startPoint,endPoint);
-				canvasState.addFigure(newFigure);
+				if (newFigure != null)
+					canvasState.addFigure(newFigure);
 			}catch (Exception e){
 				System.out.println(e.getClass());
 			}
@@ -117,12 +130,14 @@ public class PaintPane extends BorderPane {
 		});
 
 		canvas.setOnMouseDragged(event -> {
-			if(selectionButton.isSelected() && selectedFigure != null) {
+			if(selectionButton.isSelected()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
-				double diffX = (eventPoint.getX() - startPoint.getX()) / 100;
-				double diffY = (eventPoint.getY() - startPoint.getY()) / 100;
-				selectedFigure.move(diffX, diffY);
-				redrawCanvas();
+				double diffX = (eventPoint.getX() - startPoint.getX());
+				double diffY = (eventPoint.getY() - startPoint.getY());
+				if (selectedFigure != null) {
+					selectedFigure.move(diffX / 100, diffY / 100);
+					redrawCanvas();
+				}
 			}
 		});
 

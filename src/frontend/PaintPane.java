@@ -17,7 +17,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class PaintPane extends BorderPane {
@@ -33,10 +35,10 @@ public class PaintPane extends BorderPane {
 
 	// Botones Barra Izquierda
 	ToggleButton selectionButton = new ToggleButton("Seleccionar");
-	ToggleButton rectangleButton = FigureButtons.RECTANGLE.getButton();
-	ToggleButton circleButton = FigureButtons.CIRCLE.getButton();
-	ToggleButton squareButton = FigureButtons.SQUARE.getButton();
-	ToggleButton ellipseButton = FigureButtons.ELLIPSE.getButton();
+//	ToggleButton rectangleButton = FigureButtons.RECTANGLE.getButton();
+//	ToggleButton circleButton = FigureButtons.CIRCLE.getButton();
+//	ToggleButton squareButton = FigureButtons.SQUARE.getButton();
+//	ToggleButton ellipseButton = FigureButtons.ELLIPSE.getButton();
 	//ToggleButton lineButton = FigureButtons.LINE.getButton();
 
 	// Dibujar una figura
@@ -51,15 +53,18 @@ public class PaintPane extends BorderPane {
 	public PaintPane(CanvasState canvasState, StatusPane statusPane) {
 		this.canvasState = canvasState;
 		this.statusPane = statusPane;
-		ToggleButton[] toolsArr = { selectionButton, rectangleButton, circleButton, ellipseButton, squareButton};
+//		ToggleButton[] toolsArr = { selectionButton, rectangleButton, circleButton, ellipseButton, squareButton};
+		List<ToggleButton> toolsList = new ArrayList<>();
 		ToggleGroup tools = new ToggleGroup();
-		for (ToggleButton tool : toolsArr) {
+		toolsList.add(selectionButton);
+		toolsList.addAll(Arrays.stream(FigureButtons.values()).map(FigureButtons::getButton).collect(Collectors.toList()));
+		for (ToggleButton tool : toolsList) {
 			tool.setMinWidth(90);
 			tool.setToggleGroup(tools);
 			tool.setCursor(Cursor.HAND);
 		}
 		VBox buttonsBox = new VBox(10);
-		buttonsBox.getChildren().addAll(toolsArr);
+		buttonsBox.getChildren().addAll(toolsList);
 		//buttonsBox.getChildren().addAll(Arrays.stream(FigureButtons.values()).map(FigureButtons::getButton).collect(Collectors.toList()));
 		buttonsBox.setPadding(new Insets(5));
 		buttonsBox.setStyle("-fx-background-color: #999999");
@@ -119,7 +124,7 @@ public class PaintPane extends BorderPane {
 		});
 
 		canvas.setOnMouseDragged(event -> {
-			if(selectionButton.isSelected()) {
+			if(selectionButton.isSelected() && selectedFigure != null) {
 				Point eventPoint = new Point(event.getX(), event.getY());
 				double diffX = (eventPoint.getX() - startPoint.getX()) / 20;
 				double diffY = (eventPoint.getY() - startPoint.getY()) / 20;

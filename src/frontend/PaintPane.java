@@ -69,7 +69,7 @@ public class PaintPane extends BorderPane {
 		canvas.setOnMouseReleased(event -> {
 			Point endPoint = new Point(event.getX(), event.getY());
 			try {
-				Figure newFigure = FigureButtons.figure(startPoint,endPoint);
+				Figure newFigure = FigureButtons.fetchFigure(startPoint,endPoint);
 				canvasState.addFigure(newFigure);
 			}catch (Exception e){
 				System.out.println(e.getClass());

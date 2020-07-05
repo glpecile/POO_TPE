@@ -43,6 +43,7 @@ public enum FigureButtons {
     public ToggleButton getButton() {
         return button;
     }
+
     public static Figure figure(Point startPoint, Point endPoint){
         for (FigureButtons b:
              values()) {
@@ -52,6 +53,7 @@ public enum FigureButtons {
         }
         return null;
     }
+
     public abstract Figure getFigure(Point startPoint, Point endPoint);
 
 }

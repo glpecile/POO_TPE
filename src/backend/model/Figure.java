@@ -15,9 +15,9 @@ public abstract class Figure implements Movable, Colorable, Selectable {
     private double strokeWidth;
     private boolean selected=false;
 
-    public static int getCount() {
-        return count;
-    }
+//    public static int getCount() {
+//        return count;
+//    }
 
     public int getNewID() {
         return count++;

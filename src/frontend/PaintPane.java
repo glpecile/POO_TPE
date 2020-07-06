@@ -120,6 +120,7 @@ public class PaintPane extends BorderPane {
 				for (Figure figure : canvasState.figures()) {
 					if(figure.contains(eventPoint)) {
 						found = true;
+						canvasState.selectFigure(figure.getID());
 						selectedFigure = figure;
 						label.append(figure.toString());
 					}
@@ -166,6 +167,12 @@ public class PaintPane extends BorderPane {
 				selectedFigure.setStrokeWidth(strokeSlider.getValue());
 				redrawCanvas();
 			}
+		});
+
+		deleteButton.setOnAction(event -> {
+//			canvasState.deleteFigure(selectedFigure.getID());
+			canvasState.deleteSelectedFigures();
+			redrawCanvas();
 		});
 
 		setLeft(buttonsBox);

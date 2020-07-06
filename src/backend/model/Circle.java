@@ -9,15 +9,6 @@ public class Circle extends Ellipse {
         this.radius = radius;
     }
 
-//    public Circle(Point centerPoint, Point endPoint) {
-//        this(centerPoint,centerPoint.distanceTo(endPoint));
-//    }
-
-    @Override
-    public String toString() {
-        return String.format("Círculo [Centro: %s, Radio: %.2f]", centerPoint, radius);
-    }
-
     public double getRadius() {
         return radius;
     }
@@ -25,5 +16,10 @@ public class Circle extends Ellipse {
     @Override
     public boolean contains(Point p) {
         return centerPoint.distanceTo(p) < getRadius();
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Círculo [Centro: %s, Radio: %.2f]", centerPoint, radius);
     }
 }

@@ -16,16 +16,20 @@ public enum FigureButtons {
             return new Circle(startPoint, startPoint.distanceTo(endPoint));
         }
     },
-    ELLIPSE(new ToggleButton("Elipse")){
-        @Override
-        public Figure getFigure(Point startPoint, Point endPoint) {
-            return new Ellipse(startPoint,1,1);//Falta meter el constructor del ellipse
-        }
-    },
     SQUARE(new ToggleButton("Cuadrado")){
         @Override
         public Figure getFigure(Point startPoint, Point endPoint) {
             return new Square(startPoint,endPoint);
+        }
+    },
+    ELLIPSE(new ToggleButton("Elipse")){
+        @Override
+        public Figure getFigure(Point startPoint, Point endPoint) {
+            double mayorAxis = startPoint.horizontalDistanceTo(endPoint);
+            double minorAxis = startPoint.verticalDistanceTo(endPoint);
+            Point centerPoint = new Point(startPoint.getX() + mayorAxis / 2,
+                    startPoint.getY() + minorAxis / 2);
+            return new Ellipse(centerPoint, mayorAxis, minorAxis);
         }
     };
 //    LINE(new ToggleButton("Linea")){

@@ -6,18 +6,13 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
-public abstract class Figure implements Movable, Colorable, Selectable {
+public abstract class Figure implements Movable, Colorable{
 
     private static int count=0;
     private final int ID=getNewID();
     private Color strokeColor;
     private Color fillColor;
     private double strokeWidth;
-    private boolean selected=false;
-
-//    public static int getCount() {
-//        return count;
-//    }
 
     public int getNewID() {
         return count++;
@@ -60,21 +55,6 @@ public abstract class Figure implements Movable, Colorable, Selectable {
     @Override
     public double getStrokeWidth() {
         return strokeWidth;
-    }
-
-    @Override
-    public boolean isSelected() {
-        return selected;
-    }
-
-    @Override
-    public void select() {
-        selected=true;
-    }
-
-    @Override
-    public void unselect() {
-        selected=false;
     }
 
     //Funcion que determina si un punto pertence a una figura

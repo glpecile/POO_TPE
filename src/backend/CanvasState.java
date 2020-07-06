@@ -14,18 +14,10 @@ public class CanvasState {
         figureMap.put(figure.getID(),figure);
     }
 
-    public void selectFigure(int ID) { figureMap.get(ID).select(); }
-
     public void deleteFigure (int ID) { figureMap.remove(ID); }
 
     public void deleteSelectedFigures() {
 
-        for (Figure value:
-             figures()) {
-            if (value.isSelected()) {
-                deleteFigure(value.getID());
-            }
-        }
     }
 
     public Iterable<Figure> figures() {

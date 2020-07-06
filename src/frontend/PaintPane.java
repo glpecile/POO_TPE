@@ -1,10 +1,8 @@
 package frontend;
 
 import backend.CanvasState;
-import backend.model.Circle;
 import backend.model.Figure;
 import backend.model.Point;
-import backend.model.Rectangle;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -134,12 +132,15 @@ public class PaintPane extends BorderPane {
 
 		canvas.setOnMouseDragged(event -> {
 			if(selectionButton.isSelected()) {
-				Point eventPoint = new Point(event.getX(), event.getY());
-				double diffX = (eventPoint.getX() - startPoint.getX());
-				double diffY = (eventPoint.getY() - startPoint.getY());
-				if (selectedFigure != null) {
-					selectedFigure.move(diffX / 100, diffY / 100);
-					redrawCanvas();
+				if(selectionButton.isSelected()) {
+					Point eventPoint = new Point(event.getX(), event.getY());
+					double diffX = (eventPoint.getX() - startPoint.getX());
+					double diffY = (eventPoint.getY() - startPoint.getY());
+					startPoint = eventPoint;
+					if (selectedFigure != null) {
+						selectedFigure.move(diffX, diffY);
+						redrawCanvas();
+					}
 				}
 			}
 		});

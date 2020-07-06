@@ -25,11 +25,13 @@ public class Line extends Figure{
 
     @Override
     public boolean contains(Point p) {
-        Point aux = startPoint.substract(endPoint);
-        if(Double.compare (aux.getX(), 0) == 0){
-            return (p.getY()<startPoint.getY() && p.getY()>endPoint.getY()) || (p.getY()>startPoint.getY() && p.getY()<endPoint.getY());
+        if(Double.compare (startPoint.getX(), endPoint.getX()) == 0){
+            return ((p.getY()<startPoint.getY() && p.getY()>endPoint.getY()) ||
+                    (p.getY()>startPoint.getY() && p.getY()<endPoint.getY())
+                            && Double.compare(p.getX(),startPoint.getX())==0);
         }
         if((p.getX()<startPoint.getX() && p.getX()>endPoint.getX()) || (p.getX()>startPoint.getX() && p.getX()<endPoint.getX()) ){
+            Point aux = startPoint.substract(endPoint);
             double m = aux.getY()/aux.getX();
             return Double.compare(p.getY(), m*p.getX()) == 0;
         }

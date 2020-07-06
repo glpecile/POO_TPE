@@ -3,7 +3,6 @@ package frontend;
 import backend.CanvasState;
 import backend.model.Figure;
 import backend.model.Point;
-import backend.model.Rectangle;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -23,22 +22,20 @@ import java.util.stream.Collectors;
 public class PaintPane extends BorderPane {
 
 	// BackEnd
-	private CanvasState canvasState;
+	private final CanvasState canvasState;
 
 	// Canvas y relacionados
-	private Canvas canvas = new Canvas(800, 600);
-	private GraphicsContext gc = canvas.getGraphicsContext2D();
+	private final Canvas canvas = new Canvas(800, 600);
+	private final GraphicsContext gc = canvas.getGraphicsContext2D();
 
 	// Botones Barra Izquierda
-	private ToggleButton selectionButton = new ToggleButton("Seleccionar");
-	private ToggleButton deleteButton = new ToggleButton("Borrar");
-	private ToggleButton bringForwardButton = new ToggleButton("Al fondo");
-	private ToggleButton sendBackButton = new ToggleButton("Al frente");
-	private Slider strokeSlider = new Slider(1,50,0);
-	private ColorPicker strokeColorPicker = new ColorPicker(Color.BLACK);
-	private final Label	strokeText = new Label("Borde");
-	private ColorPicker fillColorPicker = new ColorPicker(Color.YELLOW);
-	private final Label	fillText = new Label("Relleno");
+	private final ToggleButton selectionButton = new ToggleButton("Seleccionar");
+	private final  ToggleButton deleteButton = new ToggleButton("Borrar");
+	private final  ToggleButton bringForwardButton = new ToggleButton("Al fondo");
+	private final ToggleButton sendBackButton = new ToggleButton("Al frente");
+	private final  Slider strokeSlider = new Slider(1,50,0);
+	private final  ColorPicker strokeColorPicker = new ColorPicker(Color.BLACK);
+	private final ColorPicker fillColorPicker = new ColorPicker(Color.YELLOW);
 
 	// Dibujar una figura
 	private Point startPoint;
@@ -48,7 +45,7 @@ public class PaintPane extends BorderPane {
 	private final Collection<Figure> selectedFigures = new ArrayList<>();
 
 	// StatusBar
-	private StatusPane statusPane;
+	private final StatusPane statusPane;
 
 	public PaintPane(CanvasState canvasState, StatusPane statusPane) {
 		this.canvasState = canvasState;
@@ -65,9 +62,11 @@ public class PaintPane extends BorderPane {
 		buttonsBox.getChildren().addAll(toolsList);
 		strokeSlider.setShowTickMarks(true);
 		strokeSlider.setShowTickLabels(true);
+		Label strokeText = new Label("Borde");
 		buttonsBox.getChildren().add(strokeText);
 		buttonsBox.getChildren().add(strokeSlider);
 		buttonsBox.getChildren().add(strokeColorPicker);
+		Label fillText = new Label("Relleno");
 		buttonsBox.getChildren().add(fillText);
 		buttonsBox.getChildren().add(fillColorPicker);
 		buttonsBox.setPadding(new Insets(5));
@@ -79,17 +78,6 @@ public class PaintPane extends BorderPane {
 
 		canvas.setOnMouseReleased(event -> {
 			Point endPoint = new Point(event.getX(), event.getY());
-//			if(selectionButton.isSelected()) {
-//				Rectangle container = new Rectangle(startPoint, endPoint);
-//				System.out.println(container);
-//				for(Figure figure : canvasState.figures()) {
-//					System.out.println("For");
-//					if(figure.isInside(container)) {
-//						System.out.println("figura añadida");
-//						selectedFigures.add(container);
-//					}
-//				}
-//			}
 			try {
 				Figure newFigure = FigureButtons.fetchFigure(startPoint,endPoint);
 				if (newFigure != null) {
@@ -130,7 +118,7 @@ public class PaintPane extends BorderPane {
 				for (Figure figure : canvasState.figures()) {
 					if(figure.contains(eventPoint)) {
 //						found = true;
-						//selectedFigures.clear();
+						selectedFigures.clear();
 						selectedFigures.add(figure);
 						//label.append(figure.toString());
 					}
@@ -140,7 +128,6 @@ public class PaintPane extends BorderPane {
 					selectedFigures.forEach(figure -> label.append(figure.toString()));
 					statusPane.updateStatus(label.toString());
 				} else {
-//					canvasState.clearSelectedFigures();
 					statusPane.updateStatus("Ninguna figura encontrada");
 				}
 				redrawCanvas();
@@ -163,19 +150,11 @@ public class PaintPane extends BorderPane {
 		});
 
 		fillColorPicker.setOnAction(event -> {
-//			if(selectedFigure != null) {
-//				selectedFigure.setFillColor(fillColorPicker.getValue());
-//				redrawCanvas();
-//			}
 			selectedFigures.forEach(figure -> figure.setFillColor(fillColorPicker.getValue()));
 			redrawCanvas();
 		});
 
 		strokeSlider.setOnMouseDragged(event -> {
-//			if(selectedFigure != null) {
-//				selectedFigure.setStrokeWidth(strokeSlider.getValue());
-//				redrawCanvas();
-//			}
 			selectedFigures.forEach(figure -> figure.setStrokeWidth(strokeSlider.getValue()));
 			redrawCanvas();
 		});
@@ -209,11 +188,6 @@ public class PaintPane extends BorderPane {
 	private void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		for(Figure figure : canvasState.figures()) {
-//			if(figure == selectedFigure) {
-//				gc.setStroke(Color.RED);
-//			} else {
-//				gc.setStroke(figure.getStrokeColor());
-//			}
 			if(selectedFigures.contains(figure)) {
 				gc.setStroke(Color.RED);
 			} else {

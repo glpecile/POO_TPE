@@ -40,7 +40,7 @@ public class Rectangle extends Figure {
         System.out.println("Is inside");
         boolean value = container.contains(topLeft) && container.contains(bottomRight);
         System.out.println(value);
-        return true;
+        return value;
 
     }
 

@@ -5,6 +5,7 @@ import javafx.scene.paint.Color;
 
 
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Figure implements Movable, Colorable{
 
@@ -17,7 +18,7 @@ public abstract class Figure implements Movable, Colorable{
     public int getNewID() {
         return count++;
     }
-
+    //Si no se usa hay que borrarlo
     public int getID() {
         return ID;
     }
@@ -67,4 +68,17 @@ public abstract class Figure implements Movable, Colorable{
     //Obligo a que todas las hijas posean toString implementado
     @Override
     public abstract String toString();
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Figure figure = (Figure) o;
+        return ID == figure.ID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
+    }
 }

@@ -120,15 +120,15 @@ public class PaintPane extends BorderPane {
 				for (Figure figure : canvasState.figures()) {
 					if(figure.contains(eventPoint)) {
 						found = true;
-						selectedFigure = figure;
+						canvasState.selectFigure(figure);
 						label.append(figure.toString());
 					}
 				}
 				if (found) {
-					strokeSlider.setValue(selectedFigure.getStrokeWidth());
+					//strokeSlider.setValue(selectedFigure.getStrokeWidth());
 					statusPane.updateStatus(label.toString());
 				} else {
-					selectedFigure = null;
+					canvasState.clearSelectedFigures();
 					statusPane.updateStatus("Ninguna figura encontrada");
 				}
 				redrawCanvas();
@@ -141,10 +141,8 @@ public class PaintPane extends BorderPane {
 				double diffX = (eventPoint.getX() - startPoint.getX());
 				double diffY = (eventPoint.getY() - startPoint.getY());
 				startPoint = eventPoint;
-				if (selectedFigure != null) {
-					selectedFigure.move(diffX, diffY);
-					redrawCanvas();
-				}
+				canvasState.selectedFigures().forEach( figure -> figure.move(diffX,diffY));
+				redrawCanvas();
 			}
 		});
 
@@ -169,7 +167,7 @@ public class PaintPane extends BorderPane {
 		});
 
 		deleteButton.setOnAction(event -> {
-			canvasState.deleteFigure(selectedFigure.getID());
+			canvasState.removeSelectedFigures();
 			redrawCanvas();
 		});
 

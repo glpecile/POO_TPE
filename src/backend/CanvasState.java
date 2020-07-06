@@ -1,27 +1,32 @@
 package backend;
 
 import backend.model.Figure;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CanvasState {
 
-    private final Map<Integer,Figure> figureMap = new HashMap<>();
+    private final LinkedList<Figure> canvasFigures = new LinkedList<>();
+    private final List<Figure> selectedFigures = new LinkedList<>();
 
     public void addFigure(Figure figure) {
-        figureMap.put(figure.getID(),figure);
+        canvasFigures.add(figure);
     }
 
-    public void deleteFigure (int ID) { figureMap.remove(ID); }
-
-    public void deleteSelectedFigures() {
-
+    public void removeSelectedFigures() {
+        selectedFigures.forEach(canvasFigures::remove);
+        selectedFigures.clear();
     }
 
     public Iterable<Figure> figures() {
-        return new ArrayList<>(figureMap.values());
+        return new ArrayList<>(canvasFigures);
     }
-
+    public void selectFigure(Figure figure){
+        selectedFigures.add(figure);
+    }
+    public void clearSelectedFigures(){
+        selectedFigures.clear();
+    }
+    public Iterable<Figure> selectedFigures() {
+        return new ArrayList<>(selectedFigures);
+    }
 }

@@ -30,9 +30,9 @@ public class Line extends Figure{
                             && Double.compare(p.getX(),startPoint.getX())==0);
         }
         if((p.getX()<startPoint.getX() && p.getX()>endPoint.getX()) || (p.getX()>startPoint.getX() && p.getX()<endPoint.getX()) ){
-            Point aux = startPoint.substract(endPoint);
-            double m = aux.getY()/aux.getX();
-            return Math.abs((p.getY() - m * p.getX())) < 1;
+            double m = (startPoint.getY()-endPoint.getY())/(startPoint.getX()-endPoint.getX());
+            double b = startPoint.getY() - m * startPoint.getX();
+            return Math.abs(p.getY() - m * p.getX() - b)<1;
         }
         return false;
     }

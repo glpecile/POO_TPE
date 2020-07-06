@@ -34,9 +34,6 @@ public class Point implements Movable{
         return Math.abs(y - p.getY());
     }
 
-    public Point substract(Point other){
-        return new Point(getX()-other.getX(), getY()-other.getY());
-    }
 
     @Override
     public String toString() {

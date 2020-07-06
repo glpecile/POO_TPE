@@ -1,5 +1,7 @@
 package backend.model;
 
+import javafx.scene.canvas.GraphicsContext;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -35,12 +37,17 @@ public class Line extends Figure{
     }
 
     @Override
-    public String toString() {
-        return String.format("Línea [Comienzo: %.2f, Fin: %.2f]", startPoint, endPoint);
+    protected List<Point> getPoints() {
+        return Arrays.asList(getStartPoint(),getEndPoint());
     }
 
     @Override
-    protected List<Point> getPoints() {
-        return Arrays.asList(getStartPoint(),getEndPoint());
+    public void draw(GraphicsContext gc) {
+        gc.strokeLine(startPoint.getX(), startPoint.getY(), endPoint.getX(), endPoint.getY());
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Línea [Comienzo: %.2f, Fin: %.2f]", startPoint, endPoint);
     }
 }

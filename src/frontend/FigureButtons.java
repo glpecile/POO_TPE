@@ -25,19 +25,22 @@ public enum FigureButtons {
     ELLIPSE(new ToggleButton("Elipse")){
         @Override
         public Figure getFigure(Point startPoint, Point endPoint) {
+            if(endPoint.getX() < startPoint.getX() || endPoint.getY() < startPoint.getY()) {
+                throw new IllegalArgumentException();
+            }
             double mayorAxis = startPoint.horizontalDistanceTo(endPoint);
             double minorAxis = startPoint.verticalDistanceTo(endPoint);
             Point centerPoint = new Point(startPoint.getX() + mayorAxis / 2,
                     startPoint.getY() + minorAxis / 2);
             return new Ellipse(centerPoint, mayorAxis, minorAxis);
         }
+    },
+    LINE(new ToggleButton("Linea")){
+        @Override
+        public Figure getFigure(Point startPoint, Point endPoint) {
+            return new Line(startPoint, endPoint);
+        }
     };
-//    LINE(new ToggleButton("Linea")){
-//        @Override
-//        public Figure getFigure(Point startPoint, Point endPoint) {
-//            return new Rectangle(startPoint,endPoint);//Falta meter el constructor del elipse
-//        }
-//    }
     private final ToggleButton button;
 
     FigureButtons(ToggleButton button) {

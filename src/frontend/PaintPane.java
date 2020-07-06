@@ -125,6 +125,7 @@ public class PaintPane extends BorderPane {
 					}
 				}
 				if (found) {
+					strokeSlider.setValue(selectedFigure.getStrokeWidth());
 					statusPane.updateStatus(label.toString());
 				} else {
 					selectedFigure = null;
@@ -171,7 +172,7 @@ public class PaintPane extends BorderPane {
 		setRight(canvas);
 	}
 
-	void redrawCanvas() {
+	private void redrawCanvas() {
 		gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		for(Figure figure : canvasState.figures()) {
 			if(figure == selectedFigure) {

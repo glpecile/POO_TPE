@@ -28,8 +28,6 @@ public class PaintPane extends BorderPane {
 	// Canvas y relacionados
 	private Canvas canvas = new Canvas(800, 600);
 	private GraphicsContext gc = canvas.getGraphicsContext2D();
-	private Color lineColor = Color.BLACK;
-	private Color fillColor = Color.YELLOW;
 
 	// Botones Barra Izquierda
 	private ToggleButton selectionButton = new ToggleButton("Seleccionar");
@@ -81,17 +79,17 @@ public class PaintPane extends BorderPane {
 
 		canvas.setOnMouseReleased(event -> {
 			Point endPoint = new Point(event.getX(), event.getY());
-			if(selectionButton.isSelected()) {
-				Rectangle container = new Rectangle(startPoint, endPoint);
-				System.out.println(container);
-				for(Figure figure : canvasState.figures()) {
-					System.out.println("For");
-					if(figure.isInside(container)) {
-						System.out.println("figura añadida");
-						selectedFigures.add(container);
-					}
-				}
-			}
+//			if(selectionButton.isSelected()) {
+//				Rectangle container = new Rectangle(startPoint, endPoint);
+//				System.out.println(container);
+//				for(Figure figure : canvasState.figures()) {
+//					System.out.println("For");
+//					if(figure.isInside(container)) {
+//						System.out.println("figura añadida");
+//						selectedFigures.add(container);
+//					}
+//				}
+//			}
 			try {
 				Figure newFigure = FigureButtons.fetchFigure(startPoint,endPoint);
 				if (newFigure != null) {
@@ -182,9 +180,25 @@ public class PaintPane extends BorderPane {
 			redrawCanvas();
 		});
 
+		//Solucionar en encapsulamiento de botones metodo que haga el clear y untoggle.
 		deleteButton.setOnAction(event -> {
 			canvasState.removeSelectedFigures(selectedFigures);
+			selectedFigures.clear();
 			deleteButton.setSelected(false);
+			redrawCanvas();
+		});
+
+		bringForwardButton.setOnAction(event -> {
+			canvasState.moveForward(selectedFigures);
+			selectedFigures.clear();
+			bringForwardButton.setSelected(false);
+			redrawCanvas();
+		});
+
+		sendBackButton.setOnAction(event -> {
+			canvasState.moveBackwards(selectedFigures);
+			selectedFigures.clear();
+			sendBackButton.setSelected(false);
 			redrawCanvas();
 		});
 

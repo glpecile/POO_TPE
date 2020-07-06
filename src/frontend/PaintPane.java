@@ -151,6 +151,7 @@ public class PaintPane extends BorderPane {
 				gc.setStroke(Color.RED);
 			} else {
 				gc.setStroke(strokeColorPicker.getValue());
+				gc.setLineWidth(strokeSlider.getValue());
 			}
 			gc.setFill(fillColorPicker.getValue());
 			figure.draw(gc);

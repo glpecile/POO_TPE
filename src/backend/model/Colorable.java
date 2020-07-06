@@ -15,9 +15,9 @@ public interface Colorable {
 
     void setStrokeWidth(double strokeWidth);
 
-    public Color getStrokeColor();
+    Color getStrokeColor();
 
-    public Color getFillColor();
+    Color getFillColor();
 
-    public double getStrokeWidth();
+    double getStrokeWidth();
 }

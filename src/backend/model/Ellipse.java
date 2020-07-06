@@ -2,7 +2,6 @@ package backend.model;
 
 import javafx.scene.canvas.GraphicsContext;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

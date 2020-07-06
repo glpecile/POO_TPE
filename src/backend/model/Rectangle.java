@@ -14,7 +14,7 @@ public class Rectangle extends Figure {
             throw new NullPointerException();
         }
         //El eje Y de la escena aumenta hacia abajo
-        if(bottomRight.getX() < topLeft.getX() || bottomRight.getY() < topLeft.getY()) {
+        if(bottomRight.getX() <= topLeft.getX() || bottomRight.getY() <= topLeft.getY()) {
             throw new IllegalArgumentException();
         }
         this.topLeft = topLeft;
@@ -37,10 +37,7 @@ public class Rectangle extends Figure {
 
     @Override
     public boolean isInside(Rectangle container) {
-        System.out.println("Is inside");
-        boolean value = container.contains(topLeft) && container.contains(bottomRight);
-        System.out.println(value);
-        return value;
+        return container.contains(topLeft) && container.contains(bottomRight);
 
     }
 

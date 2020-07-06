@@ -3,6 +3,7 @@ package frontend;
 import backend.CanvasState;
 import backend.model.Figure;
 import backend.model.Point;
+import backend.model.Rectangle;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -112,17 +113,26 @@ public class PaintPane extends BorderPane {
 		canvas.setOnMouseClicked(event -> {
 			if(selectionButton.isSelected()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
-//				boolean found = false;
-				StringBuilder label = new StringBuilder("Se seleccionó: ");
 				selectedFigures.clear();
-				for (Figure figure : canvasState.figures()) {
-					if(figure.contains(eventPoint)) {
-//						found = true;
-						selectedFigures.clear();
-						selectedFigures.add(figure);
-						//label.append(figure.toString());
+				if(!startPoint.equals(eventPoint)) {
+					Rectangle container = new Rectangle(startPoint, eventPoint);
+					System.out.println(container);
+					for (Figure figure : canvasState.figures()) {
+						if (figure.isInside(container)) {
+							selectedFigures.add(figure);
+						}
 					}
 				}
+				else {
+					for (Figure figure : canvasState.figures()) {
+						if(figure.contains(eventPoint)  ) {
+							selectedFigures.clear();
+							selectedFigures.add(figure);
+						}
+					}
+				}
+				StringBuilder label = new StringBuilder("Se seleccionó: ");
+
 				if (!selectedFigures.isEmpty()) {
 					//strokeSlider.setValue(selectedFigure.getStrokeWidth());
 					selectedFigures.forEach(figure -> label.append(figure.toString()));
@@ -135,7 +145,7 @@ public class PaintPane extends BorderPane {
 		});
 
 		canvas.setOnMouseDragged(event -> {
-			if(selectionButton.isSelected()) {
+			if(selectionButton.isSelected() && !selectedFigures.isEmpty()) {
 				Point eventPoint = new Point(event.getX(), event.getY());
 				double diffX = (eventPoint.getX() - startPoint.getX());
 				double diffY = (eventPoint.getY() - startPoint.getY());

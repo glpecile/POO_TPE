@@ -38,4 +38,8 @@ public class Point implements Movable{
     public double verticalDistanceTo(Point p) {
         return Math.abs(y - p.getY());
     }
+
+    public Point substract(Point other){
+        return new Point(getX()-other.getX(), getY()-other.getY());
+    }
 }

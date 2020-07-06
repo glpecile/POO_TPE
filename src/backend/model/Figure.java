@@ -6,7 +6,7 @@ import javafx.scene.paint.Color;
 
 import java.util.List;
 
-public abstract class Figure implements Movable {
+public abstract class Figure implements Movable, Colorable {
 
     private Color strokeColor;
     private Color fillColor;
@@ -14,12 +14,6 @@ public abstract class Figure implements Movable {
 
     public void move(double moveInX, double moveInY){
         getPoints().forEach(p->p.move(moveInX,moveInY));
-    }
-
-    public void setColorProperties(Color strokeColor, Color fillColor, double strokeWidth) {
-        setStrokeColor(strokeColor);
-        setFillColor(fillColor);
-        setStrokeWidth(strokeWidth);
     }
 
     public void setStrokeColor(Color strokeColor) {

@@ -1,5 +1,7 @@
 package backend.model;
 
+import javafx.scene.canvas.GraphicsContext;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,16 +36,24 @@ public class Rectangle extends Figure {
     }
 
     @Override
-    public String toString() {
-        return String.format("Rectángulo [ %s , %s ]", topLeft, bottomRight);
-    }
-
-    @Override
     protected List<Point> getPoints() {
         List<Point> movablePoints = new ArrayList<>();
         movablePoints.add(getBottomRight());
         movablePoints.add(getTopLeft());
         return movablePoints;
+    }
+
+    @Override
+    public void draw(GraphicsContext gc) {
+        double width = bottomRight.horizontalDistanceTo(topLeft);
+        double height = bottomRight.verticalDistanceTo(topLeft);
+        gc.strokeRect(topLeft.getX(), topLeft.getY(), width, height);
+        gc.fillRect(topLeft.getX(), topLeft.getY(), width, height);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Rectángulo [ %s , %s ]", topLeft, bottomRight);
     }
 
 }

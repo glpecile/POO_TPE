@@ -1,5 +1,7 @@
 package backend.model;
 
+import javafx.scene.canvas.GraphicsContext;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,15 +38,24 @@ public class Ellipse extends Figure {
     }
 
     @Override
-    public String toString() {
-        return String.format("Elipse [Centro: %s, Eje mayor: %.2f, Eje menor: %.2f]", centerPoint, mayorAxis, minorAxis);
-    }
-
-    @Override
     protected List<Point> getPoints() {
         List<Point> movablePoints = new ArrayList<>();
         movablePoints.add(getCenterPoint());
         return movablePoints;
     }
 
+    @Override
+    public void draw(GraphicsContext gc) {
+        gc.strokeOval(centerPoint.getX() - mayorAxis / 2,
+                centerPoint.getY() - minorAxis / 2,
+                mayorAxis, minorAxis);
+        gc.fillOval(centerPoint.getX() - mayorAxis / 2,
+                centerPoint.getY() - minorAxis / 2,
+                mayorAxis, minorAxis);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Elipse [Centro: %s, Eje mayor: %.2f, Eje menor: %.2f]", centerPoint, mayorAxis, minorAxis);
+    }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Rectangle extends Figure {
 
-    private final Point topLeft, bottomRight;
+    protected final Point topLeft, bottomRight;
 
     public Rectangle(Point topLeft, Point bottomRight) {
         if(topLeft == null || bottomRight == null) {
@@ -33,6 +33,15 @@ public class Rectangle extends Figure {
     public boolean contains(Point p) {
         return p.getX() > getTopLeft().getX() && p.getX() < getBottomRight().getX() &&
                 p.getY() > getTopLeft().getY() && p.getY() < getBottomRight().getY();
+    }
+
+    @Override
+    public boolean isInside(Rectangle container) {
+        System.out.println("Is inside");
+        boolean value = container.contains(topLeft) && container.contains(bottomRight);
+        System.out.println(value);
+        return true;
+
     }
 
     @Override

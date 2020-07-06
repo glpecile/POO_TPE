@@ -42,17 +42,34 @@ public class Ellipse extends Figure {
     }
 
     @Override
+    public boolean isInside(Rectangle container) {
+        return container.contains(getTopLeft()) && container.contains(getBottomRight());
+
+    }
+
+    private Point getTopLeft() {
+        return new Point(centerPoint.getX() - mayorAxis / 2,
+                centerPoint.getY() - minorAxis / 2);
+    }
+
+    private Point getBottomRight() {
+        return new Point(centerPoint.getX() + mayorAxis / 2,
+                centerPoint.getY() + minorAxis / 2);
+    }
+
+    @Override
     protected List<Point> getPoints() {
         return Arrays.asList(centerPoint);
     }
 
     @Override
     public void draw(GraphicsContext gc) {
-        gc.strokeOval(centerPoint.getX() - mayorAxis / 2,
-                centerPoint.getY() - minorAxis / 2,
+        Point topLeft = getTopLeft();
+        gc.strokeOval(topLeft.getX(),
+                topLeft.getY(),
                 mayorAxis, minorAxis);
-        gc.fillOval(centerPoint.getX() - mayorAxis / 2,
-                centerPoint.getY() - minorAxis / 2,
+        gc.fillOval(topLeft.getX(),
+                topLeft.getY(),
                 mayorAxis, minorAxis);
     }
 

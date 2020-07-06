@@ -61,6 +61,8 @@ public abstract class Figure implements Movable, Colorable{
     //Funcion que determina si un punto pertence a una figura
     public abstract boolean contains(Point p);
 
+    public abstract boolean isInside(Rectangle container);
+
     protected abstract List<Point> getPoints();
 
     public abstract void draw(GraphicsContext gc);

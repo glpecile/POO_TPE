@@ -3,6 +3,7 @@ package frontend;
 import backend.CanvasState;
 import backend.model.Figure;
 import backend.model.Point;
+import backend.model.Rectangle;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -80,6 +81,17 @@ public class PaintPane extends BorderPane {
 
 		canvas.setOnMouseReleased(event -> {
 			Point endPoint = new Point(event.getX(), event.getY());
+			if(selectionButton.isSelected()) {
+				Rectangle container = new Rectangle(startPoint, endPoint);
+				System.out.println(container);
+				for(Figure figure : canvasState.figures()) {
+					System.out.println("For");
+					if(figure.isInside(container)) {
+						System.out.println("figura añadida");
+						selectedFigures.add(container);
+					}
+				}
+			}
 			try {
 				Figure newFigure = FigureButtons.fetchFigure(startPoint,endPoint);
 				if (newFigure != null) {
@@ -120,12 +132,14 @@ public class PaintPane extends BorderPane {
 				for (Figure figure : canvasState.figures()) {
 					if(figure.contains(eventPoint)) {
 //						found = true;
+						//selectedFigures.clear();
 						selectedFigures.add(figure);
-						label.append(figure.toString());
+						//label.append(figure.toString());
 					}
 				}
 				if (!selectedFigures.isEmpty()) {
 					//strokeSlider.setValue(selectedFigure.getStrokeWidth());
+					selectedFigures.forEach(figure -> label.append(figure.toString()));
 					statusPane.updateStatus(label.toString());
 				} else {
 //					canvasState.clearSelectedFigures();
@@ -147,9 +161,7 @@ public class PaintPane extends BorderPane {
 		});
 
 		strokeColorPicker.setOnAction(event -> {
-			if(!selectedFigures.isEmpty()) {
-				selectedFigures.forEach(figure -> figure.setStrokeColor(strokeColorPicker.getValue()));
-			}
+			selectedFigures.forEach(figure -> figure.setStrokeColor(strokeColorPicker.getValue()));
 		});
 
 		fillColorPicker.setOnAction(event -> {
@@ -157,10 +169,8 @@ public class PaintPane extends BorderPane {
 //				selectedFigure.setFillColor(fillColorPicker.getValue());
 //				redrawCanvas();
 //			}
-			if (!selectedFigures.isEmpty())
-			{
-				selectedFigures.forEach(figure -> figure.setFillColor(fillColorPicker.getValue()));
-			}
+			selectedFigures.forEach(figure -> figure.setFillColor(fillColorPicker.getValue()));
+			redrawCanvas();
 		});
 
 		strokeSlider.setOnMouseDragged(event -> {
@@ -168,13 +178,13 @@ public class PaintPane extends BorderPane {
 //				selectedFigure.setStrokeWidth(strokeSlider.getValue());
 //				redrawCanvas();
 //			}
-			if (!selectedFigures.isEmpty()) {
-				selectedFigures.forEach(figure -> figure.setStrokeWidth(strokeSlider.getValue()));
-			}
+			selectedFigures.forEach(figure -> figure.setStrokeWidth(strokeSlider.getValue()));
+			redrawCanvas();
 		});
 
 		deleteButton.setOnAction(event -> {
 			canvasState.removeSelectedFigures(selectedFigures);
+			deleteButton.setSelected(false);
 			redrawCanvas();
 		});
 
@@ -190,13 +200,11 @@ public class PaintPane extends BorderPane {
 //			} else {
 //				gc.setStroke(figure.getStrokeColor());
 //			}
-			selectedFigures.forEach(sf -> {
-				if (figure==sf) {
-					gc.setStroke(Color.RED);
-				} else {
+			if(selectedFigures.contains(figure)) {
+				gc.setStroke(Color.RED);
+			} else {
 				gc.setStroke(figure.getStrokeColor());
-				}
-			});
+			}
 			gc.setLineWidth(figure.getStrokeWidth());
 			gc.setFill(figure.getFillColor());
 			figure.draw(gc);

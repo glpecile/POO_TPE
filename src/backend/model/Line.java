@@ -32,9 +32,15 @@ public class Line extends Figure{
         if((p.getX()<startPoint.getX() && p.getX()>endPoint.getX()) || (p.getX()>startPoint.getX() && p.getX()<endPoint.getX()) ){
             double m = (startPoint.getY()-endPoint.getY())/(startPoint.getX()-endPoint.getX());
             double b = startPoint.getY() - m * startPoint.getX();
-            return Math.abs(p.getY() - m * p.getX() - b) < 5   ;
+            return Math.abs(p.getY() - m * p.getX() - b) < 5;
         }
         return false;
+    }
+
+    @Override
+    public boolean isInside(Rectangle container) {
+        return container.contains(startPoint) && container.contains(endPoint);
+
     }
 
     @Override

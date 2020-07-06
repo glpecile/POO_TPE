@@ -33,7 +33,7 @@ public class Line extends Figure{
         if((p.getX()<startPoint.getX() && p.getX()>endPoint.getX()) || (p.getX()>startPoint.getX() && p.getX()<endPoint.getX()) ){
             Point aux = startPoint.substract(endPoint);
             double m = aux.getY()/aux.getX();
-            return (p.getY() - m * p.getX()) < 1 || (p.getY() - m * p.getX()) > -1;
+            return (p.getY() - m * p.getX()) < 2 || (p.getY() - m * p.getX()) > -2;
         }
         return false;
     }

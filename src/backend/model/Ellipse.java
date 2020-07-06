@@ -3,6 +3,7 @@ package backend.model;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Ellipse extends Figure {
@@ -34,14 +35,16 @@ public class Ellipse extends Figure {
 
     @Override
     public boolean contains(Point p) {
-        return false;
+        double deltaX = p.getX() - centerPoint.getX();
+        double deltaY = p.getY() - centerPoint.getY();
+        double a = mayorAxis / 2;
+        double b = minorAxis / 2;
+        return ((Math.pow(deltaX,2) / Math.pow(a,2)) + (Math.pow(deltaY,2) / Math.pow(b,2))) < 1;
     }
 
     @Override
     protected List<Point> getPoints() {
-        List<Point> movablePoints = new ArrayList<>();
-        movablePoints.add(getCenterPoint());
-        return movablePoints;
+        return Arrays.asList(centerPoint);
     }
 
     @Override

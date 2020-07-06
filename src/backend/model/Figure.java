@@ -1,10 +1,16 @@
 package backend.model;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+
 
 import java.util.List;
 
 public abstract class Figure implements Movable {
+
+    private Color strokeColor;
+    private Color fillColor;
+    private double strokeWidth;
 
     public void move(double moveInX, double moveInY){
         getPoints().forEach(p->p.move(moveInX,moveInY));

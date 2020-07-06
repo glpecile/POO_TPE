@@ -3,6 +3,7 @@ package backend.model;
 import javafx.scene.canvas.GraphicsContext;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Rectangle extends Figure {
@@ -37,10 +38,7 @@ public class Rectangle extends Figure {
 
     @Override
     protected List<Point> getPoints() {
-        List<Point> movablePoints = new ArrayList<>();
-        movablePoints.add(getBottomRight());
-        movablePoints.add(getTopLeft());
-        return movablePoints;
+        return Arrays.asList(bottomRight, topLeft);
     }
 
     @Override

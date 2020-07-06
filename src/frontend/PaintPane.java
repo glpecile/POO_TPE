@@ -83,8 +83,12 @@ public class PaintPane extends BorderPane {
 			Point endPoint = new Point(event.getX(), event.getY());
 			try {
 				Figure newFigure = FigureButtons.fetchFigure(startPoint,endPoint);
-				if (newFigure != null)
+				if (newFigure != null) {
+					newFigure.setColorProperties(strokeColorPicker.getValue(),
+							fillColorPicker.getValue(),
+							strokeSlider.getValue());
 					canvasState.addFigure(newFigure);
+				}
 			}catch (Exception e){
 				System.out.println(e.getClass());
 			}
@@ -132,16 +136,34 @@ public class PaintPane extends BorderPane {
 
 		canvas.setOnMouseDragged(event -> {
 			if(selectionButton.isSelected()) {
-				if(selectionButton.isSelected()) {
-					Point eventPoint = new Point(event.getX(), event.getY());
-					double diffX = (eventPoint.getX() - startPoint.getX());
-					double diffY = (eventPoint.getY() - startPoint.getY());
-					startPoint = eventPoint;
-					if (selectedFigure != null) {
-						selectedFigure.move(diffX, diffY);
-						redrawCanvas();
-					}
+				Point eventPoint = new Point(event.getX(), event.getY());
+				double diffX = (eventPoint.getX() - startPoint.getX());
+				double diffY = (eventPoint.getY() - startPoint.getY());
+				startPoint = eventPoint;
+				if (selectedFigure != null) {
+					selectedFigure.move(diffX, diffY);
+					redrawCanvas();
 				}
+			}
+		});
+
+		strokeColorPicker.setOnAction(event -> {
+			if(selectedFigure != null) {
+				selectedFigure.setStrokeColor(strokeColorPicker.getValue());
+			}
+		});
+
+		fillColorPicker.setOnAction(event -> {
+			if(selectedFigure != null) {
+				selectedFigure.setFillColor(fillColorPicker.getValue());
+				redrawCanvas();
+			}
+		});
+
+		strokeSlider.setOnMouseDragged(event -> {
+			if(selectedFigure != null) {
+				selectedFigure.setStrokeWidth(strokeSlider.getValue());
+				redrawCanvas();
 			}
 		});
 
@@ -155,10 +177,10 @@ public class PaintPane extends BorderPane {
 			if(figure == selectedFigure) {
 				gc.setStroke(Color.RED);
 			} else {
-				gc.setStroke(strokeColorPicker.getValue());
-				gc.setLineWidth(strokeSlider.getValue());
+				gc.setStroke(figure.getStrokeColor());
 			}
-			gc.setFill(fillColorPicker.getValue());
+			gc.setLineWidth(figure.getStrokeWidth());
+			gc.setFill(figure.getFillColor());
 			figure.draw(gc);
 		}
 	}

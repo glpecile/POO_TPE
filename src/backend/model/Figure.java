@@ -16,6 +16,36 @@ public abstract class Figure implements Movable {
         getPoints().forEach(p->p.move(moveInX,moveInY));
     }
 
+    public void setColorProperties(Color strokeColor, Color fillColor, double strokeWidth) {
+        setStrokeColor(strokeColor);
+        setFillColor(fillColor);
+        setStrokeWidth(strokeWidth);
+    }
+
+    public void setStrokeColor(Color strokeColor) {
+        this.strokeColor = strokeColor;
+    }
+
+    public void setFillColor(Color fillColor) {
+        this.fillColor = fillColor;
+    }
+
+    public void setStrokeWidth(double strokeWidth) {
+        this.strokeWidth = strokeWidth;
+    }
+
+    public Color getStrokeColor() {
+        return strokeColor;
+    }
+
+    public Color getFillColor() {
+        return fillColor;
+    }
+
+    public double getStrokeWidth() {
+        return strokeWidth;
+    }
+
     //Funcion que determina si un punto pertence a una figura
     public abstract boolean contains(Point p);
 

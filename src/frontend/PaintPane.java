@@ -36,9 +36,9 @@ public class PaintPane extends BorderPane {
 	private ToggleButton bringForwardButton = new ToggleButton("Al fondo");
 	private ToggleButton sendBackButton = new ToggleButton("Al frente");
 	private Slider strokeSlider = new Slider(1,50,0);
-	private ColorPicker strokeColorPicker = new ColorPicker();
+	private ColorPicker strokeColorPicker = new ColorPicker(Color.BLACK);
 	private final Label	strokeText = new Label("Borde");
-	private ColorPicker fillColorPicker = new ColorPicker();
+	private ColorPicker fillColorPicker = new ColorPicker(Color.YELLOW);
 	private final Label	fillText = new Label("Relleno");
 
 	// Dibujar una figura
@@ -150,9 +150,9 @@ public class PaintPane extends BorderPane {
 			if(figure == selectedFigure) {
 				gc.setStroke(Color.RED);
 			} else {
-				gc.setStroke(lineColor);
+				gc.setStroke(strokeColorPicker.getValue());
 			}
-			gc.setFill(fillColor);
+			gc.setFill(fillColorPicker.getValue());
 			figure.draw(gc);
 		}
 	}

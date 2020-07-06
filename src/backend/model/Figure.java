@@ -10,7 +10,6 @@ public abstract class Figure implements Movable {
         getPoints().forEach(p->p.move(moveInX,moveInY));
     }
 
-
     //Funcion que determina si un punto pertence a una figura
     public abstract boolean contains(Point p);
 

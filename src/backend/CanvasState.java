@@ -6,13 +6,12 @@ import java.util.*;
 public class CanvasState {
 
     private final LinkedList<Figure> canvasFigures = new LinkedList<>();
-    private final List<Figure> selectedFigures = new LinkedList<>();
 
     public void addFigure(Figure figure) {
         canvasFigures.add(figure);
     }
 
-    public void removeSelectedFigures() {
+    public void removeSelectedFigures(Collection<Figure> selectedFigures) {
         selectedFigures.forEach(canvasFigures::remove);
         selectedFigures.clear();
     }
@@ -20,13 +19,18 @@ public class CanvasState {
     public Iterable<Figure> figures() {
         return new ArrayList<>(canvasFigures);
     }
-    public void selectFigure(Figure figure){
-        selectedFigures.add(figure);
-    }
-    public void clearSelectedFigures(){
-        selectedFigures.clear();
-    }
-    public Iterable<Figure> selectedFigures() {
-        return new ArrayList<>(selectedFigures);
-    }
+//
+//    public void selectFigure(Figure figure){
+//        selectedFigures.add(figure);
+//    }
+//
+//    public void clearSelectedFigures(){
+//        selectedFigures.clear();
+//    }
+//
+//    public Iterable<Figure> selectedFigures() {
+//        return selectedFigures;
+//    }
+//
+//    public boolean isSelected() { return selectedFigures.isEmpty(); }
 }

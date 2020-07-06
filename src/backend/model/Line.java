@@ -48,6 +48,6 @@ public class Line extends Figure{
 
     @Override
     public String toString() {
-        return String.format("Línea [Comienzo: %s, Fin: %s]", startPoint, endPoint);
+        return String.format("Línea [ %s, %s ]", startPoint, endPoint);
     }
 }

@@ -4,6 +4,8 @@ import backend.CanvasState;
 import backend.model.Figure;
 import backend.model.Point;
 import backend.model.Rectangle;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.canvas.Canvas;
@@ -13,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -122,13 +125,7 @@ public class PaintPane extends BorderPane {
 							selectedFigures.add(figure);
 						}
 					}
-//					canvasState.figures().forEach( figure -> {
-//						if (figure.isInside(container))
-//							selectedFigures.add(figure);
-//					});
-//					canvasState.figures().stream().filter(figure -> figure.isInside(container)).map(selectedFigures::add);
-				}
-				else {
+				}else {
 					for (Figure figure : canvasState.figures()) {
 						if(figure.contains(eventPoint)  ) {
 							selectedFigures.clear();
@@ -166,15 +163,17 @@ public class PaintPane extends BorderPane {
 			selectedFigures.forEach(figure -> figure.setFillColor(fillColorPicker.getValue()));
 			redrawCanvas();
 		});
-
-		strokeSlider.setOnMouseDragged(event -> {
-			selectedFigures.forEach(figure -> figure.setStrokeWidth(strokeSlider.getValue()));
-			redrawCanvas();
-		});
-		strokeSlider.setOnMouseClicked(event -> {
-			selectedFigures.forEach(figure -> figure.setStrokeWidth(strokeSlider.getValue()));
-			redrawCanvas();
-		});
+		StrokeSliderHandler eventHandler = new StrokeSliderHandler();
+		strokeSlider.setOnMouseClicked(eventHandler);
+		strokeSlider.setOnMouseDragged(eventHandler);
+//		strokeSlider.setOnMouseDragged(event -> {
+//			selectedFigures.forEach(figure -> figure.setStrokeWidth(strokeSlider.getValue()));
+//			redrawCanvas();
+//		});
+//		strokeSlider.setOnMouseClicked(event -> {
+//			selectedFigures.forEach(figure -> figure.setStrokeWidth(strokeSlider.getValue()));
+//			redrawCanvas();
+//		});
 
 		//Solucionar en encapsulamiento de botones metodo que haga el clear y untoggle.
 		deleteButton.setOnAction(event -> {
@@ -186,14 +185,14 @@ public class PaintPane extends BorderPane {
 
 		bringForwardButton.setOnAction(event -> {
 			canvasState.moveForward(selectedFigures);
-			selectedFigures.clear();
+			//selectedFigures.clear();
 			bringForwardButton.setSelected(false);
 			redrawCanvas();
 		});
 
 		sendBackButton.setOnAction(event -> {
 			canvasState.moveBackwards(selectedFigures);
-			selectedFigures.clear();
+			//selectedFigures.clear();
 			sendBackButton.setSelected(false);
 			redrawCanvas();
 		});
@@ -215,4 +214,19 @@ public class PaintPane extends BorderPane {
 			figure.draw(gc);
 		}
 	}
+	private class StrokeSliderHandler implements EventHandler<MouseEvent>{
+
+		/**
+		 * Invoked when a specific event of the type for which this handler is
+		 * registered happens.
+		 *
+		 * @param event the event which occurred
+		 */
+		@Override
+		public void handle(MouseEvent event) {
+			selectedFigures.forEach(figure -> figure.setStrokeWidth(strokeSlider.getValue()));
+			redrawCanvas();
+		}
+	}
+
 }

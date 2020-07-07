@@ -13,34 +13,19 @@ public class CanvasState {
 
     public void removeSelectedFigures(Collection<Figure> selectedFigures) {
         selectedFigures.forEach(canvasFigures::remove);
-//        selectedFigures.clear();
     }
 
     public Iterable<Figure> figures() {
         return new ArrayList<>(canvasFigures);
     }
 
-    public void moveForward(Collection<Figure> selectedFigures) {
+    public void moveForward(LinkedList<Figure> selectedFigures) {
         removeSelectedFigures(selectedFigures);
-        selectedFigures.forEach(canvasFigures::addFirst);
+        selectedFigures.descendingIterator().forEachRemaining(canvasFigures::addFirst);
     }
 
     public void moveBackwards(Collection<Figure> selectedFigures) {
         removeSelectedFigures(selectedFigures);
         selectedFigures.forEach(canvasFigures::addLast);
     }
-//
-//    public void selectFigure(Figure figure){
-//        selectedFigures.add(figure);
-//    }
-//
-//    public void clearSelectedFigures(){
-//        selectedFigures.clear();
-//    }
-//
-//    public Iterable<Figure> selectedFigures() {
-//        return selectedFigures;
-//    }
-//
-//    public boolean isSelected() { return selectedFigures.isEmpty(); }
 }

@@ -43,7 +43,7 @@ public class PaintPane extends BorderPane {
 
 	// Seleccionar una figura
 //	private Figure selectedFigure;
-	private final Collection<Figure> selectedFigures = new ArrayList<>();
+	private final LinkedList<Figure> selectedFigures = new LinkedList<>();
 
 	// StatusBar
 	private final StatusPane statusPane;
@@ -122,6 +122,11 @@ public class PaintPane extends BorderPane {
 							selectedFigures.add(figure);
 						}
 					}
+//					canvasState.figures().forEach( figure -> {
+//						if (figure.isInside(container))
+//							selectedFigures.add(figure);
+//					});
+//					canvasState.figures().stream().filter(figure -> figure.isInside(container)).map(selectedFigures::add);
 				}
 				else {
 					for (Figure figure : canvasState.figures()) {
@@ -155,9 +160,7 @@ public class PaintPane extends BorderPane {
 			}
 		});
 
-		strokeColorPicker.setOnAction(event -> {
-			selectedFigures.forEach(figure -> figure.setStrokeColor(strokeColorPicker.getValue()));
-		});
+		strokeColorPicker.setOnAction(event -> selectedFigures.forEach(figure -> figure.setStrokeColor(strokeColorPicker.getValue())));
 
 		fillColorPicker.setOnAction(event -> {
 			selectedFigures.forEach(figure -> figure.setFillColor(fillColorPicker.getValue()));

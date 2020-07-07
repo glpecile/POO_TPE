@@ -171,6 +171,10 @@ public class PaintPane extends BorderPane {
 			selectedFigures.forEach(figure -> figure.setStrokeWidth(strokeSlider.getValue()));
 			redrawCanvas();
 		});
+		strokeSlider.setOnMouseClicked(event -> {
+			selectedFigures.forEach(figure -> figure.setStrokeWidth(strokeSlider.getValue()));
+			redrawCanvas();
+		});
 
 		//Solucionar en encapsulamiento de botones metodo que haga el clear y untoggle.
 		deleteButton.setOnAction(event -> {

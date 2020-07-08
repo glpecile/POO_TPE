@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="paintPOO">
+    <output-path>$PROJECT_DIR$/out/artifacts/paintPOO</output-path>
+    <root id="root">
+      <element id="archive" name="paintPOO.jar">
+        <element id="module-output" name="paintPOO" />
+      </element>
+    </root>
+  </artifact>
+</component>

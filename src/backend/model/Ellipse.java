@@ -13,7 +13,7 @@ public class Ellipse extends Figure {
 
     public Ellipse(Point centerPoint, double mayorAxis, double minorAxis) {
         if(centerPoint == null || mayorAxis == 0 || minorAxis == 0){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Formación de figura inválida");
         }
         this.centerPoint = centerPoint;
         this.mayorAxis = mayorAxis;

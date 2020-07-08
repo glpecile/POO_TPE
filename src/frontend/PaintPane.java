@@ -4,7 +4,6 @@ import backend.CanvasState;
 import backend.model.Figure;
 import backend.model.Point;
 import backend.model.Rectangle;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
@@ -62,17 +61,21 @@ public class PaintPane extends BorderPane {
 		toolsList.add(bringForwardButton);
 		toolsList.add(sendBackButton);
 		toolsList.forEach(tool -> { tool.setMinWidth(90); tool.setToggleGroup(tools); tool.setCursor(Cursor.HAND); });
+
 		VBox buttonsBox = new VBox(10);
 		buttonsBox.getChildren().addAll(toolsList);
+
+		Label strokeText = new Label("Borde");
 		strokeSlider.setShowTickMarks(true);
 		strokeSlider.setShowTickLabels(true);
-		Label strokeText = new Label("Borde");
 		buttonsBox.getChildren().add(strokeText);
 		buttonsBox.getChildren().add(strokeSlider);
 		buttonsBox.getChildren().add(strokeColorPicker);
+
 		Label fillText = new Label("Relleno");
 		buttonsBox.getChildren().add(fillText);
 		buttonsBox.getChildren().add(fillColorPicker);
+
 		buttonsBox.setPadding(new Insets(5));
 		buttonsBox.setStyle("-fx-background-color: #999999");
 		buttonsBox.setPrefWidth(100);
@@ -91,7 +94,7 @@ public class PaintPane extends BorderPane {
 					canvasState.addFigure(newFigure);
 				}
 			}catch (Exception e){
-				System.out.println(e.getClass());
+				statusPane.updateStatus(e.getMessage());
 			}
 			redrawCanvas();
 		});
@@ -118,12 +121,15 @@ public class PaintPane extends BorderPane {
 				Point eventPoint = new Point(event.getX(), event.getY());
 				selectedFigures.clear();
 				if(!startPoint.equals(eventPoint)) {
-					Rectangle container = new Rectangle(startPoint, eventPoint);
-					System.out.println(container);
-					for (Figure figure : canvasState.figures()) {
-						if (figure.isInside(container)) {
-							selectedFigures.add(figure);
+					try {
+						Rectangle container = new Rectangle(startPoint, eventPoint);
+						for (Figure figure : canvasState.figures()) {
+							if (figure.isInside(container)) {
+								selectedFigures.add(figure);
+							}
 						}
+					} catch(Exception e) {
+						statusPane.updateStatus(e.getMessage());
 					}
 				}else {
 					for (Figure figure : canvasState.figures()) {
@@ -166,14 +172,6 @@ public class PaintPane extends BorderPane {
 		StrokeSliderHandler eventHandler = new StrokeSliderHandler();
 		strokeSlider.setOnMouseClicked(eventHandler);
 		strokeSlider.setOnMouseDragged(eventHandler);
-//		strokeSlider.setOnMouseDragged(event -> {
-//			selectedFigures.forEach(figure -> figure.setStrokeWidth(strokeSlider.getValue()));
-//			redrawCanvas();
-//		});
-//		strokeSlider.setOnMouseClicked(event -> {
-//			selectedFigures.forEach(figure -> figure.setStrokeWidth(strokeSlider.getValue()));
-//			redrawCanvas();
-//		});
 
 		//Solucionar en encapsulamiento de botones metodo que haga el clear y untoggle.
 		deleteButton.setOnAction(event -> {

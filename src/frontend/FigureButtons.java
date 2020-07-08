@@ -26,7 +26,7 @@ public enum FigureButtons {
         @Override
         public Figure getFigure(Point startPoint, Point endPoint) {
             if(endPoint.getX() < startPoint.getX() || endPoint.getY() < startPoint.getY()) {
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Formación de figura inválida");
             }
             double mayorAxis = startPoint.horizontalDistanceTo(endPoint);
             double minorAxis = startPoint.verticalDistanceTo(endPoint);

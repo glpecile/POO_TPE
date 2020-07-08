@@ -11,11 +11,13 @@ public class Rectangle extends Figure {
 
     public Rectangle(Point topLeft, Point bottomRight) {
         if(topLeft == null || bottomRight == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("Puntos inválidos");
         }
         //El eje Y de la escena aumenta hacia abajo
-        if(bottomRight.getX() <= topLeft.getX() || bottomRight.getY() <= topLeft.getY()) {
-            throw new IllegalArgumentException();
+        if(Double.compare(bottomRight.getX(), topLeft.getX()) <= 0
+            || Double.compare(bottomRight.getY(), topLeft.getY()) <= 0) {
+        //if(bottomRight.getX() <= topLeft.getX() || bottomRight.getY() <= topLeft.getY()) {
+            throw new IllegalArgumentException("Formación de figura inválida");
         }
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;

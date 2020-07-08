@@ -142,7 +142,6 @@ public class PaintPane extends BorderPane {
 				StringBuilder label = new StringBuilder("Se seleccionó: ");
 
 				if (!selectedFigures.isEmpty()) {
-					//strokeSlider.setValue(selectedFigure.getStrokeWidth());
 					selectedFigures.forEach(figure -> label.append(figure.toString()));
 					statusPane.updateStatus(label.toString());
 				} else {
@@ -213,13 +212,6 @@ public class PaintPane extends BorderPane {
 		}
 	}
 	private class StrokeSliderHandler implements EventHandler<MouseEvent>{
-
-		/**
-		 * Invoked when a specific event of the type for which this handler is
-		 * registered happens.
-		 *
-		 * @param event the event which occurred
-		 */
 		@Override
 		public void handle(MouseEvent event) {
 			selectedFigures.forEach(figure -> figure.setStrokeWidth(strokeSlider.getValue()));

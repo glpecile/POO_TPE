@@ -2,6 +2,7 @@ package backend.model;
 
 import javafx.scene.canvas.GraphicsContext;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,11 +48,18 @@ public class Ellipse extends Figure {
 
     }
 
+    /**
+     * Realiza el calculo para el punto TopLeft del rectangulo que formo la elipse
+     * @return devuele una instancia de nueva de Point correspondiente al TopLeft
+     */
     private Point getTopLeft() {
         return new Point(centerPoint.getX() - mayorAxis / 2,
                 centerPoint.getY() - minorAxis / 2);
     }
-
+    /**
+     * Realiza el calculo para el punto BottomRight del rectangulo que formo la elipse
+     * @return devuele una instancia de nueva de Point correspondiente al BottomRight
+     */
     private Point getBottomRight() {
         return new Point(centerPoint.getX() + mayorAxis / 2,
                 centerPoint.getY() + minorAxis / 2);
@@ -59,7 +67,9 @@ public class Ellipse extends Figure {
 
     @Override
     protected List<Point> getPoints() {
-        return Arrays.asList(centerPoint);
+        List<Point> toReturn = new ArrayList<>();
+        toReturn.add(centerPoint);
+        return toReturn;
     }
 
     @Override

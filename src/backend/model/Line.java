@@ -5,10 +5,19 @@ import javafx.scene.canvas.GraphicsContext;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * modelo 2D de una linea.
+ */
 public class Line extends Figure{
+   private final static int MARGINERROR = 5;
    private final Point startPoint;
    private final Point endPoint;
 
+    /**
+     * Constructor de una linea.
+     * @param startPoint punto de inicio de la linea, es una instancia de Point.
+     * @param endPoint punto de fin de la linea, es una instancia de Point.
+     */
     public Line(Point startPoint, Point endPoint) {
         this.startPoint = startPoint;
         this.endPoint = endPoint;
@@ -32,7 +41,7 @@ public class Line extends Figure{
         if((p.getX()<startPoint.getX() && p.getX()>endPoint.getX()) || (p.getX()>startPoint.getX() && p.getX()<endPoint.getX()) ){
             double m = (startPoint.getY()-endPoint.getY())/(startPoint.getX()-endPoint.getX());
             double b = startPoint.getY() - m * startPoint.getX();
-            return Math.abs(p.getY() - m * p.getX() - b) < 5;
+            return Math.abs(p.getY() - m * p.getX() - b) < MARGINERROR;
         }
         return false;
     }

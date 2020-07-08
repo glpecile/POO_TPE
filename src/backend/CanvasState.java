@@ -7,24 +7,45 @@ public class CanvasState {
 
     private final LinkedList<Figure> canvasFigures = new LinkedList<>();
 
+    /**
+     * Se agrega la figura al canvas.
+     * @param figure la instancia Figure a agregar
+     */
     public void addFigure(Figure figure) {
         canvasFigures.add(figure);
     }
 
+    /**
+     * Se remueven las figuras seleccionadas del canvas.
+     * @param selectedFigures la colección de figuras a remover en el canvas.
+     */
     public void removeSelectedFigures(Collection<Figure> selectedFigures) {
         selectedFigures.forEach(canvasFigures::remove);
     }
 
+    /**
+     * Devuelve la instancia del canvasFigures en Iterable, para poder iterar las figuras del mismo.
+     * El usuario no puede acceder a metodos del back-end.
+     * @return un Iterable de Figures.
+     */
     public Iterable<Figure> figures() {
-        return new ArrayList<>(canvasFigures);
+        return canvasFigures;
     }
 
+    /**
+     * Permite mover las figuras el orden de aparacion de las figuras seleccionadas hacia adelante.
+     * @param selectedFigures colección de figuras a mover hacia adelante.
+     */
     public void moveForward(Collection<Figure> selectedFigures) {
-        LinkedList<Figure> linkedFigures = new LinkedList<>(selectedFigures);
         removeSelectedFigures(selectedFigures);
-        linkedFigures.descendingIterator().forEachRemaining(canvasFigures::addFirst);
+        LinkedList<Figure> aux = new LinkedList<>(selectedFigures);
+        aux.descendingIterator().forEachRemaining(canvasFigures::addFirst);
     }
 
+    /**
+     * Permite mover el orden de aparacion, de las figuras seleccionadas hacia el fondo.
+     * @param selectedFigures colección de figuras a mover hacia atrás.
+     */
     public void moveBackwards(Collection<Figure> selectedFigures) {
         removeSelectedFigures(selectedFigures);
         selectedFigures.forEach(canvasFigures::addLast);

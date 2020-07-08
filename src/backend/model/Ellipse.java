@@ -6,12 +6,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * modelo 2D de una elipse
+ */
 public class Ellipse extends Figure {
 
     protected final Point centerPoint;
     protected final double mayorAxis;
     protected final double minorAxis;
 
+    /**
+     * Nueva instancia de una elipse.
+     * @param centerPoint Punto 2D del centro de la elipse.
+     * @param mayorAxis longitud del eje mayor.
+     * @param minorAxis longitud del eje menor.
+     */
     public Ellipse(Point centerPoint, double mayorAxis, double minorAxis) {
         if(centerPoint == null || mayorAxis == 0 || minorAxis == 0){
             throw new IllegalArgumentException("Formación de figura inválida");
@@ -57,8 +66,8 @@ public class Ellipse extends Figure {
                 centerPoint.getY() - minorAxis / 2);
     }
     /**
-     * Realiza el calculo para el punto BottomRight del rectangulo que formo la elipse
-     * @return devuele una instancia de nueva de Point correspondiente al BottomRight
+     * Realiza el cálculo para el punto BottomRight del rectángulo que formó la elipse.
+     * @return devuele una instancia nueva de Point correspondiente al BottomRight.
      */
     private Point getBottomRight() {
         return new Point(centerPoint.getX() + mayorAxis / 2,

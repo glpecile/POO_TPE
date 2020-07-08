@@ -1,9 +1,17 @@
 package backend.model;
 
+/**
+ * Modelado de un círculo 2D.
+ */
 public class Circle extends Ellipse {
 
     private final double radius;
 
+    /**
+     * Crea una nueva instancia de un círculo.
+     * @param centerPoint Punto 2D donde está el centro del círculo.
+     * @param radius Radio del círculo.
+     */
     public Circle(Point centerPoint, double radius) {
         super(centerPoint, radius * 2, radius * 2);
         this.radius = radius;

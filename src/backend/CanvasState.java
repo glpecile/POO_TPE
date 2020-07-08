@@ -19,9 +19,10 @@ public class CanvasState {
         return new ArrayList<>(canvasFigures);
     }
 
-    public void moveForward(LinkedList<Figure> selectedFigures) {
+    public void moveForward(Collection<Figure> selectedFigures) {
+        LinkedList<Figure> linkedFigures = new LinkedList<>(selectedFigures);
         removeSelectedFigures(selectedFigures);
-        selectedFigures.descendingIterator().forEachRemaining(canvasFigures::addFirst);
+        linkedFigures.descendingIterator().forEachRemaining(canvasFigures::addFirst);
     }
 
     public void moveBackwards(Collection<Figure> selectedFigures) {

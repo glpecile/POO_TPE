@@ -5,18 +5,26 @@ import javafx.scene.canvas.GraphicsContext;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Modelado de una rectángulo en 2D
+ */
 public class Rectangle extends Figure {
 
     protected final Point topLeft, bottomRight;
 
+    /**
+     * Crea una nueva instancia de un rectángulo.
+     * @param topLeft Punto superior izquierdo.
+     * @param bottomRight Punto inferior derecho.
+     * @throws NullPointerException si alguno de los puntos es null.
+     * @throws IllegalArgumentException si no se respeta el orden los puntos.
+     */
     public Rectangle(Point topLeft, Point bottomRight) {
         if(topLeft == null || bottomRight == null) {
             throw new NullPointerException("Puntos inválidos");
         }
-        //El eje Y de la escena aumenta hacia abajo
         if(Double.compare(bottomRight.getX(), topLeft.getX()) <= 0
             || Double.compare(bottomRight.getY(), topLeft.getY()) <= 0) {
-        //if(bottomRight.getX() <= topLeft.getX() || bottomRight.getY() <= topLeft.getY()) {
             throw new IllegalArgumentException("Formación de figura inválida");
         }
         this.topLeft = topLeft;

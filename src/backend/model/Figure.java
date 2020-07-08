@@ -7,6 +7,9 @@ import javafx.scene.paint.Color;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * Modelado de una figura en 2D
+ */
 public abstract class Figure implements Movable, Colorable{
 
     private static int count=0;
@@ -18,6 +21,7 @@ public abstract class Figure implements Movable, Colorable{
     public int getNewID() {
         return count++;
     }
+
     //Si no se usa hay que borrarlo
     public int getID() {
         return ID;
@@ -58,16 +62,31 @@ public abstract class Figure implements Movable, Colorable{
         return strokeWidth;
     }
 
-    //Funcion que determina si un punto pertence a una figura
+    /**
+     * Determina si un punto esta dentro de una figura.
+     * @param p Punto 2D.
+     * @return true si el punto está contenido en la figura.
+     */
     public abstract boolean contains(Point p);
 
+    /**
+     * Determina si una figura está completamente contenida en un rectángulo.
+     * @param container Rectángulo donde puede estar contenida la figura.
+     * @return true si la figura está completamente contenida en container.
+     */
     public abstract boolean isInside(Rectangle container);
 
+    /**
+     * @return Lista con los puntos relevantes de la figura.
+     */
     protected abstract List<Point> getPoints();
 
+    /**
+     * Dibuja la figura.
+     * @param gc GraphicsContext donde se va a dibujar la figura.
+     */
     public abstract void draw(GraphicsContext gc);
 
-    //Obligo a que todas las hijas posean toString implementado
     @Override
     public abstract String toString();
 

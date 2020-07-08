@@ -40,7 +40,6 @@ public class Line extends Figure{
     @Override
     public boolean isInside(Rectangle container) {
         return container.contains(startPoint) && container.contains(endPoint);
-
     }
 
     @Override

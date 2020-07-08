@@ -37,6 +37,7 @@ public class PaintPane extends BorderPane {
 	private final  ToggleButton bringForwardButton = new ToggleButton("Al fondo");
 	private final ToggleButton sendBackButton = new ToggleButton("Al frente");
 	private final  Slider strokeSlider = new Slider(1,50,0);
+	StrokeSliderHandler sliderHandler = new StrokeSliderHandler();
 	private final  ColorPicker strokeColorPicker = new ColorPicker(Color.BLACK);
 	private final ColorPicker fillColorPicker = new ColorPicker(Color.YELLOW);
 
@@ -44,7 +45,6 @@ public class PaintPane extends BorderPane {
 	private Point startPoint;
 
 	// Seleccionar una figura
-//	private Figure selectedFigure;
 	private final LinkedList<Figure> selectedFigures = new LinkedList<>();
 
 	// StatusBar
@@ -168,11 +168,11 @@ public class PaintPane extends BorderPane {
 			selectedFigures.forEach(figure -> figure.setFillColor(fillColorPicker.getValue()));
 			redrawCanvas();
 		});
-		StrokeSliderHandler eventHandler = new StrokeSliderHandler();
-		strokeSlider.setOnMouseClicked(eventHandler);
-		strokeSlider.setOnMouseDragged(eventHandler);
 
-		//Solucionar en encapsulamiento de botones metodo que haga el clear y untoggle.
+		strokeSlider.setOnMouseClicked(sliderHandler);
+
+		strokeSlider.setOnMouseDragged(sliderHandler);
+
 		deleteButton.setOnAction(event -> {
 			canvasState.removeSelectedFigures(selectedFigures);
 			selectedFigures.clear();
@@ -182,14 +182,12 @@ public class PaintPane extends BorderPane {
 
 		bringForwardButton.setOnAction(event -> {
 			canvasState.moveForward(selectedFigures);
-			//selectedFigures.clear();
 			bringForwardButton.setSelected(false);
 			redrawCanvas();
 		});
 
 		sendBackButton.setOnAction(event -> {
 			canvasState.moveBackwards(selectedFigures);
-			//selectedFigures.clear();
 			sendBackButton.setSelected(false);
 			redrawCanvas();
 		});
@@ -211,6 +209,7 @@ public class PaintPane extends BorderPane {
 			figure.draw(gc);
 		}
 	}
+
 	private class StrokeSliderHandler implements EventHandler<MouseEvent>{
 		@Override
 		public void handle(MouseEvent event) {

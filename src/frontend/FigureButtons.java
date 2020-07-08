@@ -51,6 +51,12 @@ public enum FigureButtons {
         return button;
     }
 
+    /**
+     * Busca el boton de las figuras que esta seleccionado, para poder devolver una instancia nueva de esa figura a partir de dos puntos.
+     * @param startPoint instancia de Point
+     * @param endPoint instancia de Point
+     * @return devuelve una nueva instancia de la figura correspondiente si es que se encuentra el botón seleccionado. Sino se retorna null.
+     */
     public static Figure fetchFigure(Point startPoint, Point endPoint){
         for (FigureButtons b : values()) {
             if(b.button.isSelected()){
@@ -60,6 +66,12 @@ public enum FigureButtons {
         return null;
     }
 
+    /**
+     * Es un método abstracto que se debe sobreescrbir en cada instancia para devolver la instancia de la figura que corresponde.
+     * @param startPoint instancia de Point
+     * @param endPoint instancia de Point
+     * @return devuelve una nueva instancia de la figura correspondiente.
+     */
     public abstract Figure getFigure(Point startPoint, Point endPoint);
 
 }

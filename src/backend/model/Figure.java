@@ -12,19 +12,14 @@ import java.util.Objects;
  */
 public abstract class Figure implements Movable, Colorable{
 
-    private static int count=0;
-    private final int ID=getNewID();
+    private static int count = 0;
+    private final int ID = getNewID();
     private Color strokeColor = Color.BLACK;
     private Color fillColor = Color.BLACK;
     private double strokeWidth = 1;
 
     public int getNewID() {
         return count++;
-    }
-
-    //Si no se usa hay que borrarlo
-    public int getID() {
-        return ID;
     }
 
     @Override

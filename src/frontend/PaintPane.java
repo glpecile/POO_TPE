@@ -37,6 +37,7 @@ public class PaintPane extends BorderPane {
 	private final  ToggleButton bringForwardButton = new ToggleButton("Al fondo");
 	private final ToggleButton sendBackButton = new ToggleButton("Al frente");
 	private final  Slider strokeSlider = new Slider(1,50,0);
+	StrokeSliderHandler sliderHandler = new StrokeSliderHandler();
 	private final  ColorPicker strokeColorPicker = new ColorPicker(Color.BLACK);
 	private final ColorPicker fillColorPicker = new ColorPicker(Color.YELLOW);
 
@@ -90,8 +91,6 @@ public class PaintPane extends BorderPane {
 					newFigure.setColorProperties(strokeColorPicker.getValue(),
 							fillColorPicker.getValue(),
 							strokeSlider.getValue());
-					System.out.println("Color" + newFigure.getFillColor());
-					System.out.println("Ancho" + newFigure.getStrokeWidth());
 					canvasState.addFigure(newFigure);
 				}
 			}catch (Exception e){
@@ -169,9 +168,10 @@ public class PaintPane extends BorderPane {
 			selectedFigures.forEach(figure -> figure.setFillColor(fillColorPicker.getValue()));
 			redrawCanvas();
 		});
-		StrokeSliderHandler eventHandler = new StrokeSliderHandler();
-		strokeSlider.setOnMouseClicked(eventHandler);
-		strokeSlider.setOnMouseDragged(eventHandler);
+
+		strokeSlider.setOnMouseClicked(sliderHandler);
+
+		strokeSlider.setOnMouseDragged(sliderHandler);
 
 		deleteButton.setOnAction(event -> {
 			canvasState.removeSelectedFigures(selectedFigures);
@@ -209,6 +209,7 @@ public class PaintPane extends BorderPane {
 			figure.draw(gc);
 		}
 	}
+
 	private class StrokeSliderHandler implements EventHandler<MouseEvent>{
 		@Override
 		public void handle(MouseEvent event) {

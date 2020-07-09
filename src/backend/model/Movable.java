@@ -8,8 +8,8 @@ public interface Movable {
 
     /**
      * Desplaza al objeto en la plano.
-     * @param moveInX variación
-     * @param moveInY
+     * @param moveInX variación en el eje X
+     * @param moveInY variación en el eje Y
      */
     void move(double moveInX, double moveInY);
 }

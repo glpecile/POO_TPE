@@ -44,8 +44,7 @@ public class PaintPane extends BorderPane {
 	private Point startPoint;
 
 	// Seleccionar una figura
-//	private Figure selectedFigure;
-	private final LinkedList<Figure> selectedFigures = new LinkedList<>();
+	private final Collection<Figure> selectedFigures = new LinkedList<>();
 
 	// StatusBar
 	private final StatusPane statusPane;
@@ -91,6 +90,8 @@ public class PaintPane extends BorderPane {
 					newFigure.setColorProperties(strokeColorPicker.getValue(),
 							fillColorPicker.getValue(),
 							strokeSlider.getValue());
+					System.out.println("Color" + newFigure.getFillColor());
+					System.out.println("Ancho" + newFigure.getStrokeWidth());
 					canvasState.addFigure(newFigure);
 				}
 			}catch (Exception e){
@@ -172,7 +173,6 @@ public class PaintPane extends BorderPane {
 		strokeSlider.setOnMouseClicked(eventHandler);
 		strokeSlider.setOnMouseDragged(eventHandler);
 
-		//Solucionar en encapsulamiento de botones metodo que haga el clear y untoggle.
 		deleteButton.setOnAction(event -> {
 			canvasState.removeSelectedFigures(selectedFigures);
 			selectedFigures.clear();
@@ -182,14 +182,12 @@ public class PaintPane extends BorderPane {
 
 		bringForwardButton.setOnAction(event -> {
 			canvasState.moveForward(selectedFigures);
-			//selectedFigures.clear();
 			bringForwardButton.setSelected(false);
 			redrawCanvas();
 		});
 
 		sendBackButton.setOnAction(event -> {
 			canvasState.moveBackwards(selectedFigures);
-			//selectedFigures.clear();
 			sendBackButton.setSelected(false);
 			redrawCanvas();
 		});

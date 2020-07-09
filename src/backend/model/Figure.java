@@ -14,9 +14,9 @@ public abstract class Figure implements Movable, Colorable{
 
     private static int count=0;
     private final int ID=getNewID();
-    private Color strokeColor;
-    private Color fillColor;
-    private double strokeWidth;
+    private Color strokeColor = Color.BLACK;
+    private Color fillColor = Color.BLACK;
+    private double strokeWidth = 1;
 
     public int getNewID() {
         return count++;
@@ -93,7 +93,7 @@ public abstract class Figure implements Movable, Colorable{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Figure)) return false;
         Figure figure = (Figure) o;
         return ID == figure.ID;
     }

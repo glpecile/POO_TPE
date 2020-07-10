@@ -57,7 +57,7 @@ public class Point implements Movable{
      * @return se retorna la distancia horizontal entre dos puntos como una instancia de double.
      */
     public double verticalDistanceTo(Point p) {
-        return Math.abs(y - p.getY());
+        return Math.abs(p.getY() - y);
     }
 
 

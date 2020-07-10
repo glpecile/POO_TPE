@@ -40,6 +40,7 @@ public class PaintPane extends BorderPane {
 	StrokeSliderHandler sliderHandler = new StrokeSliderHandler();
 	private final  ColorPicker strokeColorPicker = new ColorPicker(Color.BLACK);
 	private final ColorPicker fillColorPicker = new ColorPicker(Color.YELLOW);
+	
 
 	// Dibujar una figura
 	private Point startPoint;

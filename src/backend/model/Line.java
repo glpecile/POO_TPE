@@ -23,13 +23,15 @@ public class Line extends Figure{
         this.endPoint = endPoint;
     }
 
+    public Point getStartPoint() {
+        return startPoint;
+    }
+
     public Point getEndPoint() {
         return endPoint;
     }
 
-    public Point getStartPoint() {
-        return startPoint;
-    }
+
 
     @Override
     public boolean contains(Point p) {

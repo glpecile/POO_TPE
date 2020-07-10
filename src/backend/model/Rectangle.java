@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Modelado de una rectángulo en 2D
+ * Modelado de una rectángulo en 2D.
  */
 public class Rectangle extends Figure {
 
@@ -13,10 +13,10 @@ public class Rectangle extends Figure {
 
     /**
      * Crea una nueva instancia de un rectángulo.
-     * @param topLeft Punto superior izquierdo.
-     * @param bottomRight Punto inferior derecho.
+     * @param topLeft punto superior izquierdo.
+     * @param bottomRight punto inferior derecho.
      * @throws NullPointerException si alguno de los puntos es null.
-     * @throws IllegalArgumentException si no se respeta el orden los puntos.
+     * @throws IllegalArgumentException si no se respeta el orden de los puntos.
      */
     public Rectangle(Point topLeft, Point bottomRight) {
         if(topLeft == null || bottomRight == null) {

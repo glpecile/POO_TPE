@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * modelo 2D de una elipse
+ * modelo 2D de una elipse.
  */
 public class Ellipse extends Figure {
 
@@ -66,7 +66,7 @@ public class Ellipse extends Figure {
     }
     /**
      * Realiza el cálculo para el punto BottomRight del rectángulo que formó la elipse.
-     * @return devuele una instancia nueva de Point correspondiente al BottomRight.
+     * @return devuelve una instancia nueva de Point correspondiente al BottomRight.
      */
     private Point getBottomRight() {
         return new Point(centerPoint.getX() + mayorAxis / 2,

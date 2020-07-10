@@ -10,9 +10,9 @@ public interface Colorable {
 
     /**
      * Establece las propiedades de color del objeto.
-     * @param strokeColor Color del borde del objeto.
-     * @param fillColor Color del relleno del objeto.
-     * @param strokeWidth Ancho del borde del objeto.
+     * @param strokeColor color del borde del objeto.
+     * @param fillColor color del relleno del objeto.
+     * @param strokeWidth ancho del borde del objeto.
      */
     default void setColorProperties(Color strokeColor, Color fillColor, double strokeWidth) {
         setStrokeColor(strokeColor);

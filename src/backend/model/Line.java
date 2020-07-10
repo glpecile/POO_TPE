@@ -31,8 +31,6 @@ public class Line extends Figure{
         return endPoint;
     }
 
-
-
     @Override
     public boolean contains(Point p) {
         if(Double.compare (startPoint.getX(), endPoint.getX()) == 0){

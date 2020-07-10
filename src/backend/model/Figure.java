@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Modelado de una figura en 2D
+ * Modelado de una figura en 2D.
  */
 public abstract class Figure implements Movable, Colorable{
 
@@ -58,15 +58,15 @@ public abstract class Figure implements Movable, Colorable{
     }
 
     /**
-     * Determina si un punto esta dentro de una figura.
-     * @param p Punto 2D.
+     * Determina si un punto está dentro de una figura.
+     * @param p punto 2D.
      * @return true si el punto está contenido en la figura.
      */
     public abstract boolean contains(Point p);
 
     /**
      * Determina si una figura está completamente contenida en un rectángulo.
-     * @param container Rectángulo donde puede estar contenida la figura.
+     * @param container rectángulo donde puede estar contenida la figura.
      * @return true si la figura está completamente contenida en container.
      */
     public abstract boolean isInside(Rectangle container);
@@ -78,7 +78,7 @@ public abstract class Figure implements Movable, Colorable{
 
     /**
      * Dibuja la figura.
-     * @param gc GraphicsContext donde se va a dibujar la figura.
+     * @param gc graphicsContext donde se va a dibujar la figura.
      */
     public abstract void draw(GraphicsContext gc);
 

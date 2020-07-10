@@ -4,13 +4,13 @@ import backend.model.*;
 import javafx.scene.control.ToggleButton;
 
 public enum FigureButtons {
-    RECTANGLE(new ToggleButton("Rectangulo")){
+    RECTANGLE(new ToggleButton("Rectángulo")){
         @Override
         public Figure getFigure(Point startPoint, Point endPoint) {
             return new Rectangle(startPoint,endPoint);
         }
     },
-    CIRCLE(new ToggleButton("Circulo")){
+    CIRCLE(new ToggleButton("Círculo")){
         @Override
         public Figure getFigure(Point startPoint, Point endPoint) {
             return new Circle(startPoint, startPoint.distanceTo(endPoint));
@@ -35,7 +35,7 @@ public enum FigureButtons {
             return new Ellipse(centerPoint, mayorAxis, minorAxis);
         }
     },
-    LINE(new ToggleButton("Linea")){
+    LINE(new ToggleButton("Línea")){
         @Override
         public Figure getFigure(Point startPoint, Point endPoint) {
             return new Line(startPoint, endPoint);
@@ -52,7 +52,7 @@ public enum FigureButtons {
     }
 
     /**
-     * Busca el boton de las figuras que esta seleccionado, para poder devolver una instancia nueva de esa figura a partir de dos puntos.
+     * Busca el botón de las figuras que está seleccionado, para poder devolver una instancia nueva de esa figura a partir de dos puntos.
      * @param startPoint instancia de Point
      * @param endPoint instancia de Point
      * @return devuelve una nueva instancia de la figura correspondiente si es que se encuentra el botón seleccionado. Sino se retorna null.

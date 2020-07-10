@@ -5,7 +5,6 @@ import java.util.Objects;
 /**
  * modelado 2D de un punto
  */
-
 public class Point implements Movable{
 
     private double x, y;
@@ -37,7 +36,7 @@ public class Point implements Movable{
     /**
      * Cálculo de la distancia entre dos puntos.
      * @param p instancia de Point.
-     * @return se retorna la distancia entre los dos puntos como una instancia de double.
+     * @return se retorna la distancia entre los dos puntos como double.
      */
     public double distanceTo(Point p){
         return Math.sqrt(Math.pow(p.getX() - x, 2) + Math.pow(p.getY() - y, 2));
@@ -46,20 +45,20 @@ public class Point implements Movable{
     /**
      * Cálculo de la distancia horizontal entre dos puntos.
      * @param p instancia de Point.
-     * @return se retorna la distancia horizontal entre dos puntos como una instancia de double.
+     * @return se retorna la distancia horizontal entre dos puntos como double.
      */
     public double horizontalDistanceTo(Point p) {
         return Math.abs(p.getX() - x);
     }
+
     /**
      * Cálculo de la distancia vertical entre dos puntos.
      * @param p instancia de Point.
-     * @return se retorna la distancia horizontal entre dos puntos como una instancia de double.
+     * @return se retorna la distancia horizontal entre dos puntos como double.
      */
     public double verticalDistanceTo(Point p) {
         return Math.abs(p.getY() - y);
     }
-
 
     @Override
     public String toString() {

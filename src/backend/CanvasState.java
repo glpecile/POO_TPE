@@ -25,7 +25,7 @@ public class CanvasState {
 
     /**
      * Devuelve la instancia del canvasFigures en Iterable, para poder iterar las figuras del mismo.
-     * El usuario no puede acceder a metodos del back-end.
+     * El usuario no puede acceder a métodos del back-end.
      * @return un Iterable de Figures.
      */
     public Iterable<Figure> figures() {
@@ -33,7 +33,7 @@ public class CanvasState {
     }
 
     /**
-     * Permite mover las figuras el orden de aparacion de las figuras seleccionadas hacia adelante.
+     * Permite mover el orden de aparación de las figuras seleccionadas hacia adelante.
      * @param selectedFigures colección de figuras a mover hacia adelante.
      */
     public void moveForward(Collection<Figure> selectedFigures) {
@@ -43,7 +43,7 @@ public class CanvasState {
     }
 
     /**
-     * Permite mover el orden de aparacion, de las figuras seleccionadas hacia el fondo.
+     * Permite mover el orden de aparación, de las figuras seleccionadas hacia el fondo.
      * @param selectedFigures colección de figuras a mover hacia atrás.
      */
     public void moveBackwards(Collection<Figure> selectedFigures) {

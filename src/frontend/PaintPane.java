@@ -24,31 +24,29 @@ import java.util.stream.Collectors;
 
 public class PaintPane extends BorderPane {
 
-	// BackEnd
+	// BackEnd.
 	private final CanvasState canvasState;
 
-	// Canvas y relacionados
+	// Canvas y relacionados.
 	private final Canvas canvas = new Canvas(800, 600);
 	private final GraphicsContext gc = canvas.getGraphicsContext2D();
 
-	// Botones Barra Izquierda
+	// Botones Barra Izquierda.
 	private final ToggleButton selectionButton = new ToggleButton("Seleccionar");
-	private final  ToggleButton deleteButton = new ToggleButton("Borrar");
-	private final  ToggleButton bringForwardButton = new ToggleButton("Al fondo");
+	private final ToggleButton deleteButton = new ToggleButton("Borrar");
+	private final ToggleButton bringForwardButton = new ToggleButton("Al fondo");
 	private final ToggleButton sendBackButton = new ToggleButton("Al frente");
-	private final  Slider strokeSlider = new Slider(1,50,0);
-	StrokeSliderHandler sliderHandler = new StrokeSliderHandler();
-	private final  ColorPicker strokeColorPicker = new ColorPicker(Color.BLACK);
+	private final Slider strokeSlider = new Slider(1,50,0);
+	private final ColorPicker strokeColorPicker = new ColorPicker(Color.BLACK);
 	private final ColorPicker fillColorPicker = new ColorPicker(Color.YELLOW);
-	
 
-	// Dibujar una figura
+	// Dibujar una figura.
 	private Point startPoint;
 
-	// Seleccionar una figura
+	// Seleccionar una figura.
 	private final Collection<Figure> selectedFigures = new LinkedList<>();
 
-	// StatusBar
+	// StatusBar.
 	private final StatusPane statusPane;
 
 	public PaintPane(CanvasState canvasState, StatusPane statusPane) {
@@ -169,6 +167,8 @@ public class PaintPane extends BorderPane {
 			selectedFigures.forEach(figure -> figure.setFillColor(fillColorPicker.getValue()));
 			redrawCanvas();
 		});
+
+		StrokeSliderHandler sliderHandler = new StrokeSliderHandler();
 
 		strokeSlider.setOnMouseClicked(sliderHandler);
 

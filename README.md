@@ -2,6 +2,8 @@
 TPE POO (trabajo final)
 
 ## Instrucciones de uso
+### Inicialización del programa
+Se debe ejecutar el main de las clase AppLauncher.
 ### Interfaz de usuario
 En la parte superior tenemos una barra de menúes, los cuales son ``Archivo``, que contiene un botón para salir, y ``Ayuda``, que contiene un botón para abrir información del programa.
 En la parte izquierda, se sitúa la barra de botones, los cuales sirven para crear figuras, modificarlas y borrarlas.

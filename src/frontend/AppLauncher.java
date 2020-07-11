@@ -7,19 +7,19 @@ import javafx.stage.Stage;
 
 public class AppLauncher extends Application {
 
-	public static void main(String[] args) {
-		launch(args);
-	}
+    public static void main(String[] args) {
+        launch(args);
+    }
 
-	@Override
-	public void start(Stage primaryStage) {
-		CanvasState canvasState = new CanvasState(); // BackEnd
-		MainFrame frame = new MainFrame(canvasState);
-		Scene scene = new Scene(frame);
-		primaryStage.setResizable(false);
-		primaryStage.setScene(scene);
-		primaryStage.show();
-		primaryStage.setOnCloseRequest(event -> System.exit(0));
-	}
+    @Override
+    public void start(Stage primaryStage) {
+        CanvasState canvasState = new CanvasState(); // BackEnd
+        MainFrame frame = new MainFrame(canvasState);
+        Scene scene = new Scene(frame);
+        primaryStage.setResizable(false);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+        primaryStage.setOnCloseRequest(event -> System.exit(0));
+    }
 
 }

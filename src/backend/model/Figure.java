@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * Modelado de una figura en 2D.
  */
-public abstract class Figure implements Movable, Colorable{
+public abstract class Figure implements Movable, Colorable, Drawable{
 
     private static int count = 0;
     private final int ID = getNewID();
@@ -57,6 +57,9 @@ public abstract class Figure implements Movable, Colorable{
         return strokeWidth;
     }
 
+    @Override
+    public abstract void draw(GraphicsContext gc);
+
     /**
      * Determina si un punto está dentro de una figura.
      * @param p punto 2D.
@@ -75,12 +78,6 @@ public abstract class Figure implements Movable, Colorable{
      * @return Lista con los puntos relevantes de la figura.
      */
     protected abstract List<Point> getPoints();
-
-    /**
-     * Dibuja la figura.
-     * @param gc graphicsContext donde se va a dibujar la figura.
-     */
-    public abstract void draw(GraphicsContext gc);
 
     @Override
     public abstract String toString();

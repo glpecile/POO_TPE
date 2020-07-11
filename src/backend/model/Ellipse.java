@@ -16,7 +16,7 @@ public class Ellipse extends Figure {
 
     /**
      * Nueva instancia de una elipse.
-     * @param centerPoint Punto 2D del centro de la elipse.
+     * @param centerPoint punto 2D del centro de la elipse.
      * @param mayorAxis longitud del eje mayor.
      * @param minorAxis longitud del eje menor.
      */
@@ -57,8 +57,8 @@ public class Ellipse extends Figure {
     }
 
     /**
-     * Realiza el calculo para el punto TopLeft del rectangulo que formo la elipse
-     * @return devuele una instancia de nueva de Point correspondiente al TopLeft
+     * Realiza el cálculo para el punto TopLeft del rectángulo que formo la elipse.
+     * @return devuelve una instancia nueva de Point correspondiente al TopLeft
      */
     private Point getTopLeft() {
         return new Point(centerPoint.getX() - mayorAxis / 2,

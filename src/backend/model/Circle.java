@@ -10,7 +10,7 @@ public class Circle extends Ellipse {
     /**
      * Crea una nueva instancia de un círculo.
      * @param centerPoint punto 2D donde está el centro del círculo.
-     * @param radius Radio del círculo.
+     * @param radius radio del círculo.
      */
     public Circle(Point centerPoint, double radius) {
         super(centerPoint, radius * 2, radius * 2);

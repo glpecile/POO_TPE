@@ -18,7 +18,7 @@ public abstract class Figure implements Movable, Colorable{
     private Color fillColor = Color.BLACK;
     private double strokeWidth = 1;
 
-    public int getNewID() {
+    private int getNewID() {
         return count++;
     }
 
